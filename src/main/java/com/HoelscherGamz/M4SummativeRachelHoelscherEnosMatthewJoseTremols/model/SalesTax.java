@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -12,17 +13,23 @@ import java.math.BigDecimal;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name = "SalesTax")
+@Table(name = "sales_tax_rate")
 public class SalesTax {
+
     @NotNull
-    @Column(length = 2)
+    @Column(columnDefinition = "CHAR(2)")
     private String state;
 
     @NotNull
-    @Digits(integer = 5,fraction = 2)
+    @Digits(integer = 3,fraction = 2)
     private BigDecimal rate;
 
+    @Index(name = "ix_state_rate", columnList = "state", unique = true)
+
+
 /*
+
+create unique index ix_state_rate on sales_tax_rate (state);
 
 Alabama—AL: .05
 
