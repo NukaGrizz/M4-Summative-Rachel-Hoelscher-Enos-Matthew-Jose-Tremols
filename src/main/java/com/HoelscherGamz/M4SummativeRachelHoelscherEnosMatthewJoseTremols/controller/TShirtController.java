@@ -23,7 +23,7 @@ public class TShirtController {
 
     //Get tShirt by id
     @GetMapping(value = "/{id}")
-    public TShirts getCarById(@PathVariable int id) {
+    public TShirts getTShirtById(@PathVariable int id) {
         Optional<TShirts> tShirts = tShirtRepository.findById(id);
 
         if (!tShirts.isPresent()) {
