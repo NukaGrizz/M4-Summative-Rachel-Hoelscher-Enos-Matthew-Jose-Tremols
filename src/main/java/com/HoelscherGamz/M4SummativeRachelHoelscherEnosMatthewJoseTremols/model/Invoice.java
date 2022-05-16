@@ -15,7 +15,7 @@ public class Invoice {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long gameId;
+    private Long invoiceId;
 
     @NotNull
     @Column(length = 80)
@@ -67,8 +67,8 @@ public class Invoice {
     @Digits(integer = 5, fraction = 2)
     private BigDecimal total;
 
-    public Invoice(Long gameId, String name, String street, String city, String state, String zipcode, String item_type, Long item_id, BigDecimal unit_price, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processing_fee, BigDecimal total) {
-        this.gameId = gameId;
+    public Invoice(Long invoiceId, String name, String street, String city, String state, String zipcode, String item_type, Long item_id, BigDecimal unit_price, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processing_fee, BigDecimal total) {
+        this.invoiceId = invoiceId;
         this.name = name;
         this.street = street;
         this.city = city;
@@ -87,12 +87,12 @@ public class Invoice {
     public Invoice() {
     }
 
-    public Long getGameId() {
-        return gameId;
+    public Long getInvoiceId() {
+        return invoiceId;
     }
 
-    public void setGameId(Long gameId) {
-        this.gameId = gameId;
+    public void setInvoiceId(Long invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
     public String getName() {
@@ -204,18 +204,18 @@ public class Invoice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Invoice invoice = (Invoice) o;
-        return quantity == invoice.quantity && Objects.equals(gameId, invoice.gameId) && Objects.equals(name, invoice.name) && Objects.equals(street, invoice.street) && Objects.equals(city, invoice.city) && Objects.equals(state, invoice.state) && Objects.equals(zipcode, invoice.zipcode) && Objects.equals(item_type, invoice.item_type) && Objects.equals(item_id, invoice.item_id) && Objects.equals(unit_price, invoice.unit_price) && Objects.equals(subtotal, invoice.subtotal) && Objects.equals(tax, invoice.tax) && Objects.equals(processing_fee, invoice.processing_fee) && Objects.equals(total, invoice.total);
+        return quantity == invoice.quantity && Objects.equals(invoiceId, invoice.invoiceId) && Objects.equals(name, invoice.name) && Objects.equals(street, invoice.street) && Objects.equals(city, invoice.city) && Objects.equals(state, invoice.state) && Objects.equals(zipcode, invoice.zipcode) && Objects.equals(item_type, invoice.item_type) && Objects.equals(item_id, invoice.item_id) && Objects.equals(unit_price, invoice.unit_price) && Objects.equals(subtotal, invoice.subtotal) && Objects.equals(tax, invoice.tax) && Objects.equals(processing_fee, invoice.processing_fee) && Objects.equals(total, invoice.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gameId, name, street, city, state, zipcode, item_type, item_id, unit_price, quantity, subtotal, tax, processing_fee, total);
+        return Objects.hash(invoiceId, name, street, city, state, zipcode, item_type, item_id, unit_price, quantity, subtotal, tax, processing_fee, total);
     }
 
     @Override
     public String toString() {
         return "Invoice{" +
-                "gameId=" + gameId +
+                "invoiceId=" + invoiceId +
                 ", name='" + name + '\'' +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
