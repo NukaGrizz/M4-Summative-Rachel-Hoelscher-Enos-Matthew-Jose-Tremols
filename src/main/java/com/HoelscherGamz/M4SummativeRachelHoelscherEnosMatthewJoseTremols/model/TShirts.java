@@ -1,4 +1,4 @@
-package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.models;
+package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

@@ -1,6 +1,6 @@
 package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repository;
 
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.models.TShirts;
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.TShirts;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

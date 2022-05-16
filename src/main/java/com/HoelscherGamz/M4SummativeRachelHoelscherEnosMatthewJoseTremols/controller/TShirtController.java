@@ -1,6 +1,6 @@
 package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.controller;
 
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.models.TShirts;
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.TShirts;
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repository.TShirtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
