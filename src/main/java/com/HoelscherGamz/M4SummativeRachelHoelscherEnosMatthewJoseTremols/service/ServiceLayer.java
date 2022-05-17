@@ -1,9 +1,6 @@
 package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.service;
 
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Console;
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Game;
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Invoice;
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.TShirt;
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.*;
 
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -318,10 +315,98 @@ public class ServiceLayer {
     //CRUD OPERATIONS FOR PROCESSING FEE
     //
 
+    //Create new processing fee
+    @Transactional
+    public ProcessingFee saveProcessingFee(ProcessingFee processingFee) {
+
+        // Persist processingFee
+        ProcessingFee p = new ProcessingFee();
+        p.setProduct_type(processingFee.getProduct_type());
+        p.setFee(processingFee.getFee());
+        processingFeeRepository.save(p);
+        return processingFee;
+    }
+
+    //Get ProcessingFee by id->"productType"
+    public ProcessingFee findProcessingFee(String productType) {
+
+        // Get the game object first
+        Optional<ProcessingFee> processingFee = processingFeeRepository.findById(productType);
+
+        return processingFee.isPresent() ? processingFee.get() : null;
+    }
+
+    //Get all processingFees
+    public List<ProcessingFee> findAllProcessingFee() {
+
+        List<ProcessingFee> processingFeeList = processingFeeRepository.findAll();
+
+        return processingFeeList;
+    }
+
+    // Update ProcessingFee information
+    @Transactional
+    public void updateProcessingFee(ProcessingFee processingFee) {
+        ProcessingFee p = new ProcessingFee();
+        p.setProduct_type(processingFee.getProduct_type());
+        p.setFee(processingFee.getFee());
+        processingFeeRepository.save(p);
+    }
+
+    // Delete ProcessingFee
+    @Transactional
+    public void removeProcessingFee(String productType) {
+        processingFeeRepository.deleteById(productType);
+    }
+
 
     //
     //CRUD OPERATIONS FOR SALES TAX
     //
+
+    //Create new sales tax
+    @Transactional
+    public SalesTax saveSalesTax(SalesTax salesTax) {
+
+        // Persist sales tax
+        SalesTax s = new SalesTax();
+        s.setState(salesTax.getState());
+        s.setRate(salesTax.getRate());
+        salesTaxRepository.save(s);
+        return salesTax;
+    }
+
+    //Get Sales Tax by id->"State"
+    public SalesTax findSalesTaxRate(String state) {
+
+        // Get the game object first
+        Optional<SalesTax> salesTax = salesTaxRepository.findById(state);
+
+        return salesTax.isPresent() ? salesTax.get() : null;
+    }
+
+    //Get all Sales Tax
+    public List<SalesTax> findAllSalesTax() {
+
+        List<SalesTax> salesTaxList = salesTaxRepository.findAll();
+
+        return salesTaxList;
+    }
+
+    // Update Sales Tax information
+    @Transactional
+    public void updateSalesTaxRate(SalesTax salesTax) {
+        SalesTax s = new SalesTax();
+        s.setState(salesTax.getState());
+        s.setRate(salesTax.getRate());
+        salesTaxRepository.save(s);
+    }
+
+    // Delete ProcessingFee
+    @Transactional
+    public void removeSalesTax(String State) {
+        salesTaxRepository.deleteById(State);
+    }
 
 
 }
