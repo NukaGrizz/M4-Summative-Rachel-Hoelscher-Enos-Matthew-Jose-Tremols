@@ -15,13 +15,13 @@ public class GameController {
     GameRepository gameRepository;
 
     //Get all game
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/game")
     public List<Game> getAllGames() {
         return gameRepository.findAll();
     }
 
     //Get game by id
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/game/{id}")
     public Game getGameById(@PathVariable long id) {
         Optional<Game> game = gameRepository.findById(id);
 
