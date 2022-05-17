@@ -17,7 +17,7 @@ public class TShirtController {
     TShirtRepository tShirtRepository;
 
     //Get all tShirt
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "")
     public List<TShirt> getAllTShirt() {
         return tShirtRepository.findAll();
     }

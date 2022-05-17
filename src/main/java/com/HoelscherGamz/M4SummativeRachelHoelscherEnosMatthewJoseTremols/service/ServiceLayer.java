@@ -1,8 +1,6 @@
 package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.service;
 
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Console;
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Game;
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.TShirt;
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.*;
 
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,7 +108,7 @@ public class ServiceLayer {
         // Persist console
         Game g = new Game();
         g.setTitle(game.getTitle());
-        g.setEsrb_rating(game.getEsrb_rating());
+        g.setEsrbRating(game.getEsrbRating());
         g.setDescription(game.getDescription());
         g.setPrice(game.getPrice());
         g.setStudio(game.getStudio());
@@ -143,7 +141,7 @@ public class ServiceLayer {
         Game g = new Game();
         g.setGame_id(game.getGame_id(1L));
         g.setTitle(game.getTitle());
-        g.setEsrb_rating(game.getEsrb_rating());
+        g.setEsrbRating(game.getEsrbRating());
         g.setDescription(game.getDescription());
         g.setPrice(game.getPrice());
         g.setStudio(game.getStudio());
@@ -164,7 +162,7 @@ public class ServiceLayer {
 
     //Search for games by ESBR_Rating
     public List<Game> findByRating(String rating){
-        return gameRepository.findAllGamesByRating(rating);
+        return gameRepository.findAllGamesByEsrbRating(rating);
     }
 
     //Search for games by Title
@@ -175,10 +173,10 @@ public class ServiceLayer {
 
 
     //
-    //CRUD OPERATIONS FOR TSHIRT
+    //CRUD OPERATIONS FOR TShirt
     //
 
-    //Create new tshirt
+    //Create new TShirt
     @Transactional
     public TShirt saveTShirt(TShirt tshirt) {
 
@@ -194,10 +192,9 @@ public class ServiceLayer {
         return tshirt;
     }
 
-    //Get game by id
+    //Get TShirt by id
     public TShirt findTShirt(Long id) {
 
-        // Get the game object first
         Optional<TShirt> tShirt = tShirtRepository.findById(id);
 
         return tShirt.isPresent() ? tShirt.get() : null;
@@ -224,7 +221,7 @@ public class ServiceLayer {
         tShirtRepository.save(t);
     }
 
-    // Delete Game
+    // Delete TShirt
     @Transactional
     public void removeTShirt(Long id) {
         tShirtRepository.deleteById(id);
@@ -241,20 +238,175 @@ public class ServiceLayer {
     }
 
 
-
     //
     //CRUD OPERATIONS FOR INVOICE
     //
+
+    //Create New Invoice
+    @Transactional
+    public Invoice saveInvoice(Invoice invoice) {
+
+        // Persist invoice
+        Invoice i = new Invoice();
+        i.setName(invoice.getName());
+        i.setStreet(invoice.getStreet());
+        i.setCity(invoice.getCity());
+        i.setState(invoice.getState());
+        i.setZipcode(invoice.getZipcode());
+        i.setItemType(invoice.getItemType());
+        i.setItemId(invoice.getItemId());
+        i.setUnit_price(invoice.getUnit_price());
+        i.setQuantity(invoice.getQuantity());
+        i.setSubtotal(invoice.getSubtotal());
+        i.setTax(invoice.getTax());
+        i.setProcessing_fee(invoice.getProcessing_fee());
+        i.setTotal(invoice.getTotal());
+        invoiceRepository.save(i);
+        invoice.setInvoice_id(i.getInvoice_id());
+        return invoice;
+    }
+
+    //Get Invoice by id
+    public Invoice findInovice(Long id) {
+
+        // Get the game object first
+        Optional<Invoice> invoice = invoiceRepository.findById(id);
+
+        return invoice.isPresent() ? invoice.get() : null;
+    }
+
+    //Get all Invoices
+    public List<Invoice> findAllInvoice() {
+
+        List<Invoice> invoiceList = invoiceRepository.findAll();
+
+        return invoiceList;
+    }
+
+    // Update Invoice information
+    @Transactional
+    public void updateInvoice(Invoice invoice) {
+        Invoice i = new Invoice();
+        i.setInvoice_id(invoice.getInvoice_id());
+        i.setName(invoice.getName());
+        i.setStreet(invoice.getStreet());
+        i.setCity(invoice.getCity());
+        i.setState(invoice.getState());
+        i.setZipcode(invoice.getZipcode());
+        i.setItemType(invoice.getItemType());
+        i.setItemId(invoice.getItemId());
+        i.setUnit_price(invoice.getUnit_price());
+        i.setQuantity(invoice.getQuantity());
+        i.setSubtotal(invoice.getSubtotal());
+        i.setTax(invoice.getTax());
+        i.setProcessing_fee(invoice.getProcessing_fee());
+        i.setTotal(invoice.getTotal());
+        invoiceRepository.save(i);
+    }
+
+    // Delete Invoice
+    @Transactional
+    public void removeInvoice(Long id) {
+        invoiceRepository.deleteById(id);
+    }
 
 
     //
     //CRUD OPERATIONS FOR PROCESSING FEE
     //
 
+    //Create new processing fee
+    @Transactional
+    public ProcessingFee saveProcessingFee(ProcessingFee processingFee) {
+
+        // Persist processingFee
+        ProcessingFee p = new ProcessingFee();
+        p.setProduct_type(processingFee.getProduct_type());
+        p.setFee(processingFee.getFee());
+        processingFeeRepository.save(p);
+        return processingFee;
+    }
+
+    //Get ProcessingFee by id->"productType"
+    public ProcessingFee findProcessingFee(String productType) {
+
+        // Get the game object first
+        Optional<ProcessingFee> processingFee = processingFeeRepository.findById(productType);
+
+        return processingFee.isPresent() ? processingFee.get() : null;
+    }
+
+    //Get all processingFees
+    public List<ProcessingFee> findAllProcessingFee() {
+
+        List<ProcessingFee> processingFeeList = processingFeeRepository.findAll();
+
+        return processingFeeList;
+    }
+
+    // Update ProcessingFee information
+    @Transactional
+    public void updateProcessingFee(ProcessingFee processingFee) {
+        ProcessingFee p = new ProcessingFee();
+        p.setProduct_type(processingFee.getProduct_type());
+        p.setFee(processingFee.getFee());
+        processingFeeRepository.save(p);
+    }
+
+    // Delete ProcessingFee
+    @Transactional
+    public void removeProcessingFee(String productType) {
+        processingFeeRepository.deleteById(productType);
+    }
+
 
     //
     //CRUD OPERATIONS FOR SALES TAX
     //
+
+    //Create new sales tax
+    @Transactional
+    public SalesTax saveSalesTax(SalesTax salesTax) {
+
+        // Persist sales tax
+        SalesTax s = new SalesTax();
+        s.setState(salesTax.getState());
+        s.setRate(salesTax.getRate());
+        salesTaxRepository.save(s);
+        return salesTax;
+    }
+
+    //Get Sales Tax by id->"State"
+    public SalesTax findSalesTaxRate(String state) {
+
+        // Get the game object first
+        Optional<SalesTax> salesTax = salesTaxRepository.findById(state);
+
+        return salesTax.isPresent() ? salesTax.get() : null;
+    }
+
+    //Get all Sales Tax
+    public List<SalesTax> findAllSalesTax() {
+
+        List<SalesTax> salesTaxList = salesTaxRepository.findAll();
+
+        return salesTaxList;
+    }
+
+    // Update Sales Tax information
+    @Transactional
+    public void updateSalesTaxRate(SalesTax salesTax) {
+        SalesTax s = new SalesTax();
+        s.setState(salesTax.getState());
+        s.setRate(salesTax.getRate());
+        salesTaxRepository.save(s);
+    }
+
+    // Delete ProcessingFee
+    @Transactional
+    public void removeSalesTax(String State) {
+        salesTaxRepository.deleteById(State);
+    }
 
 
 }
