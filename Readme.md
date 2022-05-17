@@ -2,7 +2,7 @@
 
 ### src/main/resources/application.properties
 ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/customer_data_service?useSSL=false&serverTimezone=US/Central&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+spring.datasource.url=jdbc:mysql://localhost:3306/game_store?useSSL=false&serverTimezone=US/Central&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
 spring.datasource.username=root
 spring.datasource.password=MYSQLPASSWORD
 spring.jpa.hibernate.ddl-auto=update
