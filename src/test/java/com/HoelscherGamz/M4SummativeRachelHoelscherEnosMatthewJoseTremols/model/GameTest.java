@@ -13,13 +13,13 @@ public class GameTest {
 
     @Test
     public void getGameId() {
-        assertEquals(Optional.of(5L),Optional.of(gameTester.getGameId()));
+        assertEquals(Optional.of(5L),Optional.of(gameTester.getGame_id(1L)));
     }
 
     @Test
     public void setGameId() {
-        gameTester.setGameId(1L);
-        assertEquals(Optional.of(1L),Optional.of(gameTester.getGameId()));
+        gameTester.setGame_id(1L);
+        assertEquals(Optional.of(1L),Optional.of(gameTester.getGame_id(1L)));
     }
 
     @Test

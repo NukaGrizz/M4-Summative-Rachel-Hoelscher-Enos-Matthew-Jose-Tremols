@@ -40,7 +40,21 @@ public class Game {
     @NotNull
     private int quantity;
 
-    public Long getGame_id() {
+    public Game(Long game_id, String title, String esrb_rating, String description, BigDecimal price, String studio, int quantity) {
+        this.game_id = game_id;
+        this.title = title;
+        this.esrb_rating = esrb_rating;
+        this.description = description;
+        this.price = price;
+        this.studio = studio;
+        this.quantity = quantity;
+    }
+
+    public Game(){
+
+    }
+
+    public Long getGame_id(long l) {
         return game_id;
     }
 

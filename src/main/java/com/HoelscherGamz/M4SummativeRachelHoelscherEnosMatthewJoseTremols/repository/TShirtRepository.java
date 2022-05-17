@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface TShirtRepository extends JpaRepository<TShirt, Integer> {
+public interface TShirtRepository extends JpaRepository<TShirt, Long> {
 
     //Search for T-shirts by color.
     List<TShirt> findByColor(String color);

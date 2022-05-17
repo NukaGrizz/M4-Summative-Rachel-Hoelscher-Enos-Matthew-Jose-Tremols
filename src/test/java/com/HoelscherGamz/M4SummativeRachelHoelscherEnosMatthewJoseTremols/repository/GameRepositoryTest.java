@@ -1,5 +1,6 @@
 package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repository;
 
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Console;
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Game;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,7 @@ public class GameRepositoryTest {
 
     @Autowired
     GameRepository gameRepository;
+    ConsoleRepository consoleRepository;
 
     @org.junit.Before
     public void setUp() throws Exception {
@@ -38,13 +40,13 @@ public class GameRepositoryTest {
 
         game = gameRepository.save(game);
 
-        Optional<Game> game1 = gameRepository.findById(game.getGame_id());
+        Optional<Game> game1 = gameRepository.findById(game.getGame_id(1L));
 
         assertEquals(game1.get(), game);
 
-        gameRepository.deleteById(game.getGame_id());
+        gameRepository.deleteById(game.getGame_id(1L));
 
-        game1 = gameRepository.findById(game.getGame_id());
+        game1 = gameRepository.findById(game.getGame_id(1L));
 
         assertFalse(game1.isPresent());
 
@@ -70,7 +72,7 @@ public class GameRepositoryTest {
         game.setQuantity(150);
         gameRepository.save(game);
 
-        Optional<Game> game1 = gameRepository.findById(game.getGame_id());
+        Optional<Game> game1 = gameRepository.findById(game.getGame_id(1L));
         assertEquals(game1.get(), game);
 
     }
@@ -79,10 +81,10 @@ public class GameRepositoryTest {
     public void getAllConsoles() {
 
         Console console = new Console();
-        console.setId(1L);
+        console.setConsole_id(1L);
         console.setModel("PS5");
         console.setManufacturer("Sony");
-        console.setMemoryAmount("825 GB");
+        console.setMemory_amount("825 GB");
         console.setProcessor("AMD Zen 2 CPU");
         console.setPrice(BigDecimal.valueOf(499.99));
         console.setQuantity(100);
@@ -92,7 +94,7 @@ public class GameRepositoryTest {
         console = new Console();
         console.setModel("XBox Series X");
         console.setManufacturer("Microsoft");
-        console.setMemoryAmount("1TB");
+        console.setMemory_amount("1TB");
         console.setProcessor("AMD Zen 2 CPU");
         console.setPrice(BigDecimal.valueOf(550.99));
         console.setQuantity(200);

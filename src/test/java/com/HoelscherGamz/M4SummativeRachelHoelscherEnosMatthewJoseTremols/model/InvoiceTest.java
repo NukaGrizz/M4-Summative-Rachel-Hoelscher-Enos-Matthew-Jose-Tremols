@@ -13,13 +13,13 @@ public class InvoiceTest {
 
     @Test
     public void getInvoiceId() {
-        assertEquals(Optional.of(11L),Optional.of(invoiceTester.getInvoiceId()));
+        assertEquals(Optional.of(11L),Optional.of(invoiceTester.getInvoice_id()));
     }
 
     @Test
     public void setInvoiceId() {
-        invoiceTester.setInvoiceId(12L);
-        assertEquals(Optional.of(12L),Optional.of(invoiceTester.getInvoiceId()));
+        invoiceTester.setInvoice_id(12L);
+        assertEquals(Optional.of(12L),Optional.of(invoiceTester.getInvoice_id()));
     }
 
     @Test
