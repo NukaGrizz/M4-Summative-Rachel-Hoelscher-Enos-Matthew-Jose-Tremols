@@ -2,7 +2,10 @@ package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repos
 
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Game;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,6 +13,8 @@ import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class GameRepositoryTest {
 
     @Autowired
@@ -23,7 +28,7 @@ public class GameRepositoryTest {
     @Test
     public void addGetDeleteGame() {
         Game game = new Game();
-        game.setId(1L);
+        game.setGame_id(1L);
         game.setTitle("Breath of the Wild");
         game.setEsrb_rating("E10+");
         game.setDescription("The player controls an amnesiac Link, who awakens from a hundred-year slumber, and attempts to regain his memories and prevent the destruction of Hyrule by Calamity Ganon.");
@@ -33,13 +38,13 @@ public class GameRepositoryTest {
 
         game = gameRepository.save(game);
 
-        Optional<Game> game1 = gameRepository.findById(game.getId());
+        Optional<Game> game1 = gameRepository.findById(game.getGame_id());
 
         assertEquals(game1.get(), game);
 
-        gameRepository.deleteById(game.getId());
+        gameRepository.deleteById(game.getGame_id());
 
-        game1 = gameRepository.findById(game.getId());
+        game1 = gameRepository.findById(game.getGame_id());
 
         assertFalse(game1.isPresent());
 
@@ -48,7 +53,7 @@ public class GameRepositoryTest {
     @Test
     public void updateGame() {
         Game game = new Game();
-        game.setId(1L);
+        game.getGame_id(1L);
         game.setTitle("Breath of the Wild");
         game.setEsrb_rating("E10+");
         game.setDescription("The player controls an amnesiac Link, who awakens from a hundred-year slumber, and attempts to regain his memories and prevent the destruction of Hyrule by Calamity Ganon.");
@@ -65,7 +70,7 @@ public class GameRepositoryTest {
         game.setQuantity(150);
         gameRepository.save(game);
 
-        Optional<Game> game1 = gameRepository.findById(game.getId());
+        Optional<Game> game1 = gameRepository.findById(game.getGame_id());
         assertEquals(game1.get(), game);
 
     }

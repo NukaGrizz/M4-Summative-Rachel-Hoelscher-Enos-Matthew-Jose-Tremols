@@ -29,7 +29,7 @@ public class ConsoleRepositoryTest {
     @Test
     public void addGetDeleteConsole() {
         Console console = new Console();
-        console.setId(1L);
+        console.setConsole_id(1L);
         console.setModel("PS5");
         console.setManufacturer("Sony");
         console.setMemoryAmount("825 GB");
@@ -43,9 +43,9 @@ public class ConsoleRepositoryTest {
 
         assertEquals(console1.get(), console);
 
-        consoleRepository.deleteById(console.getId());
+        consoleRepository.deleteById(console.getConsole_id());
 
-        console1 = consoleRepository.findById(console.getId());
+        console1 = consoleRepository.findById(console.getConsole_id());
 
         assertFalse(console1.isPresent());
 
@@ -54,7 +54,7 @@ public class ConsoleRepositoryTest {
     @Test
     public void updateConsole() {
         Console console = new Console();
-        console.setId(1L);
+        console.setConsole_id(1L);
         console.setModel("PS5");
         console.setManufacturer("Sony");
         console.setMemoryAmount("825 GB");
@@ -82,7 +82,7 @@ public class ConsoleRepositoryTest {
     public void getAllConsoles() {
 
         Console console = new Console();
-        console.setId(1L);
+        console.setConsole_id(1L);
         console.setModel("PS5");
         console.setManufacturer("Sony");
         console.setMemoryAmount("825 GB");
@@ -93,7 +93,7 @@ public class ConsoleRepositoryTest {
         console = consoleRepository.save(console);
 
         console = new Console();
-        console.setId(2L);
+        console.setConsole_id(2L);
         console.setModel("XBox Series X");
         console.setManufacturer("Microsoft");
         console.setMemoryAmount("1TB");
