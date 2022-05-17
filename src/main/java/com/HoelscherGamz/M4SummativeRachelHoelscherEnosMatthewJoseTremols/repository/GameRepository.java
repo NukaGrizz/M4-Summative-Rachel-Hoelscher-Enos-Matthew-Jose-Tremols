@@ -12,7 +12,7 @@ import java.util.List;
 public interface GameRepository extends JpaRepository<Game, Long> {
 
     List<Game> findAllGamesByTitle(String title);
-    List<Game> findAllGamesByRating(String esrb_rating);
+    List<Game> findAllGamesByEsrbRating(String esrbRating);
     List<Game> findAllGamesByDescription(String description);
     List<Game> findAllGamesByPrice(BigDecimal price);
     List<Game> findAllGamesByStudio(String studio);

@@ -38,11 +38,12 @@ public class Invoice {
     private String zipcode;
 
     @NotNull
-    @Column(length = 20)
-    private String item_type;
+    @Column(length = 20, name = "item_type")
+    private String itemType;
 
     @NotNull
-    private Long item_id;
+    @Column(name = "item_id")
+    private Long itemId;
 
     @NotNull
     @Digits(integer = 5, fraction = 2)
@@ -67,15 +68,15 @@ public class Invoice {
     @Digits(integer = 5, fraction = 2)
     private BigDecimal total;
 
-    public Invoice(Long invoice_id, String name, String street, String city, String state, String zipcode, String item_type, Long item_id, BigDecimal unit_price, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processing_fee, BigDecimal total) {
+    public Invoice(Long invoice_id, String name, String street, String city, String state, String zipcode, String itemType, Long itemId, BigDecimal unit_price, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processing_fee, BigDecimal total) {
         this.invoice_id = invoice_id;
         this.name = name;
         this.street = street;
         this.city = city;
         this.state = state;
         this.zipcode = zipcode;
-        this.item_type = item_type;
-        this.item_id = item_id;
+        this.itemType = itemType;
+        this.itemId = itemId;
         this.unit_price = unit_price;
         this.quantity = quantity;
         this.subtotal = subtotal;
@@ -132,20 +133,20 @@ public class Invoice {
         this.zipcode = zipcode;
     }
 
-    public String getItem_type() {
-        return item_type;
+    public String getItemType() {
+        return itemType;
     }
 
-    public void setItem_type(String item_type) {
-        this.item_type = item_type;
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
 
-    public Long getItem_id() {
-        return item_id;
+    public Long getItemId() {
+        return itemId;
     }
 
-    public void setItem_id(Long item_id) {
-        this.item_id = item_id;
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
     }
 
     public BigDecimal getUnit_price() {
@@ -201,12 +202,12 @@ public class Invoice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Invoice invoice = (Invoice) o;
-        return quantity == invoice.quantity && Objects.equals(invoice_id, invoice.invoice_id) && Objects.equals(name, invoice.name) && Objects.equals(street, invoice.street) && Objects.equals(city, invoice.city) && Objects.equals(state, invoice.state) && Objects.equals(zipcode, invoice.zipcode) && Objects.equals(item_type, invoice.item_type) && Objects.equals(item_id, invoice.item_id) && Objects.equals(unit_price, invoice.unit_price) && Objects.equals(subtotal, invoice.subtotal) && Objects.equals(tax, invoice.tax) && Objects.equals(processing_fee, invoice.processing_fee) && Objects.equals(total, invoice.total);
+        return quantity == invoice.quantity && Objects.equals(invoice_id, invoice.invoice_id) && Objects.equals(name, invoice.name) && Objects.equals(street, invoice.street) && Objects.equals(city, invoice.city) && Objects.equals(state, invoice.state) && Objects.equals(zipcode, invoice.zipcode) && Objects.equals(itemType, invoice.itemType) && Objects.equals(itemId, invoice.itemId) && Objects.equals(unit_price, invoice.unit_price) && Objects.equals(subtotal, invoice.subtotal) && Objects.equals(tax, invoice.tax) && Objects.equals(processing_fee, invoice.processing_fee) && Objects.equals(total, invoice.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(invoice_id, name, street, city, state, zipcode, item_type, item_id, unit_price, quantity, subtotal, tax, processing_fee, total);
+        return Objects.hash(invoice_id, name, street, city, state, zipcode, itemType, itemId, unit_price, quantity, subtotal, tax, processing_fee, total);
     }
 
     @Override
@@ -218,8 +219,8 @@ public class Invoice {
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
                 ", zipcode='" + zipcode + '\'' +
-                ", item_type='" + item_type + '\'' +
-                ", item_id=" + item_id +
+                ", itemType='" + itemType + '\'' +
+                ", itemId=" + itemId +
                 ", unit_price=" + unit_price +
                 ", quantity=" + quantity +
                 ", subtotal=" + subtotal +

@@ -16,11 +16,11 @@ public class ConsoleController {
     ConsoleRepository consoleRepository;
 
     //Get all consoles
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/console")
     public List<Console> getAllConsoles() {return consoleRepository.findAll();}
 
     //Get console by id
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/console/{id}")
     public Console getConsoleById(@PathVariable long id) {
         Optional<Console> console = consoleRepository.findById(id);
         if (!console.isPresent()) {
