@@ -35,7 +35,7 @@ public class InvoiceRepositoryTest {
     }
 
     @Test
-    public void addGetDeleteInventory() {
+    public void shouldAddGetDeleteInventory() {
 //
     }
     /*
@@ -44,10 +44,16 @@ public class InvoiceRepositoryTest {
     public void addGetDeleteGameInvoice() {
 
         // Need to create a Game and select a Sales Tax first
-        Label label = new Label();
-        label.setName("A&M");
-        label.setWebsite("www.aandm.com");
-        label = labelRepository.save(label);
+        Game game = new Game();
+        game.setGame_id(1L);
+        game.setTitle("Breath of the Wild");
+        game.setEsrb_rating("E10+");
+        game.setDescription("The player controls an amnesiac Link, who awakens from a hundred-year slumber, and attempts to regain his memories and prevent the destruction of Hyrule by Calamity Ganon.");
+        game.setStudio("Nintendo");
+        game.setPrice(BigDecimal.valueOf(40.99));
+        game.setQuantity(150);
+
+
 
         Artist artist = new Artist();
         artist.setName("Rock Start");

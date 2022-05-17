@@ -28,7 +28,7 @@ public class GameRepositoryTest {
     }
 
     @Test
-    public void addGetDeleteGame() {
+    public void shouldAddGetDeleteGame() {
         Game game = new Game();
         game.setGame_id(1L);
         game.setTitle("Breath of the Wild");
@@ -53,7 +53,7 @@ public class GameRepositoryTest {
     }
 
     @Test
-    public void updateGame() {
+    public void shouldUpdateGame() {
         Game game = new Game();
         game.getGame_id(1L);
         game.setTitle("Breath of the Wild");
@@ -78,7 +78,7 @@ public class GameRepositoryTest {
     }
 
     @Test
-    public void getAllGames() {
+    public void shouldGetAllGames() {
 
         Game game = new Game();
         game.getGame_id(1L);
