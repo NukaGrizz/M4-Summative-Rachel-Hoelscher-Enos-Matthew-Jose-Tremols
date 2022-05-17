@@ -16,5 +16,4 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     List<Game> findAllGamesByDescription(String description);
     List<Game> findAllGamesByPrice(BigDecimal price);
     List<Game> findAllGamesByStudio(String studio);
-
 }
