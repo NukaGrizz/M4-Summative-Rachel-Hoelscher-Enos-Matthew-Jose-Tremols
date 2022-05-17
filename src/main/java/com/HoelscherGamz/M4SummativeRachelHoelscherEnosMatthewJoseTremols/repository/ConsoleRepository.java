@@ -1,15 +1,16 @@
 package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repository;
 
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Console;
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.TShirt;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface TShirtRepository extends JpaRepository<TShirt, Integer> {
+public interface ConsoleRepository extends JpaRepository {
 
-    //Search for T-shirts by color.
-    List<TShirt> findByColor(String color);
+    //Search for consoles by manufacturer.
+    List<Console> findByManufacturer(String manufacturer);
 
-    //Search for T-shirts by size.
-    List<TShirt> findBySize(String size);
+
+
 }
