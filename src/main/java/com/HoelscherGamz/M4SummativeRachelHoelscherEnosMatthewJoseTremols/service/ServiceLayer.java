@@ -260,6 +260,14 @@ public class ServiceLayer {
         i.setItemId(invoice.getItemId());
         i.setQuantity(invoice.getQuantity());
 
+        if(invoice.getQuantity() == 0) {
+            throw new IllegalArgumentException("Invoice Quantity cannot equal 0");
+        }
+
+        if(invoice.getState().equals(findSalesTaxRate(invoice.getState()).getState())){
+            throw new IllegalArgumentException("Invoice State not vaild - State value must equal value of a SalesTax state. To see SaleTax states query SaleTax Endpoint to get all entries");
+        }
+
         //ensure enough left for order subtract from model quantity remaining and set price
         if (invoice.getItemType().equals("game")) {
 
