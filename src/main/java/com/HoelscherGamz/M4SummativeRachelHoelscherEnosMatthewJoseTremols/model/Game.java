@@ -15,6 +15,7 @@ public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long game_id;
 
     @NotNull

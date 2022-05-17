@@ -13,6 +13,7 @@ import java.util.Objects;
 @Table(name="tShirt")
 public class TShirt {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
@@ -98,7 +99,9 @@ public class TShirt {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         TShirt tShirt = (TShirt) o;
+
         return quantity == tShirt.quantity && Objects.equals(t_shirt_id, tShirt.t_shirt_id) && Objects.equals(size, tShirt.size) && Objects.equals(color, tShirt.color) && Objects.equals(description, tShirt.description) && Objects.equals(price, tShirt.price);
     }
 
@@ -109,6 +112,7 @@ public class TShirt {
 
     @Override
     public String toString() {
+
         return "TShirt{" +
                 "t_shirt_id=" + t_shirt_id +
                 ", size='" + size + '\'' +
