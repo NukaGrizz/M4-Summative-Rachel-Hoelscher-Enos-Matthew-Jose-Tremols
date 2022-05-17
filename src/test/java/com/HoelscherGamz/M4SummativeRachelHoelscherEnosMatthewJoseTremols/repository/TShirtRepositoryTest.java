@@ -26,7 +26,7 @@ public class TShirtRepositoryTest {
     }
 
     @Test
-    public void addGetDeleteTShirt() {
+    public void shouldAddGetDeleteTShirt() {
         TShirt tShirt = new TShirt();
         tShirt.setT_shirt_id(1L);
         tShirt.setSize("Large");
@@ -50,7 +50,7 @@ public class TShirtRepositoryTest {
     }
 
     @Test
-    public void updateTShirt() {
+    public void shouldUpdateTShirt() {
         TShirt tShirt = new TShirt();
         tShirt.setT_shirt_id(1L);
         tShirt.setSize("Large");
@@ -75,7 +75,7 @@ public class TShirtRepositoryTest {
     }
 
     @Test
-    public void getAllTShirts() {
+    public void shouldGetAllTShirts() {
 
         TShirt tShirt = new TShirt();
         tShirt.setT_shirt_id(1L);

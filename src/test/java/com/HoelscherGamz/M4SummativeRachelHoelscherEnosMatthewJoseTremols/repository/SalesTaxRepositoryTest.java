@@ -40,7 +40,7 @@ public class SalesTaxRepositoryTest {
         // how to delete by something other than ID?
         salesTaxRepository.deleteById(salesTax.getState("CA"));
 
-        salesTax1 = salesTaxRepository.findById(salesTax.getState("CA"));
+        salesTax1 = salesTaxRepository.findBy("CA");
 
         assertFalse(salesTax1.isPresent());
 
@@ -57,7 +57,7 @@ public class SalesTaxRepositoryTest {
         salesTax.setRate(BigDecimal.valueOf(.05));
         salesTaxRepository.save(salesTax);
 
-        Optional<SalesTax> salesTax1 = salesTaxRepository.findById(salesTax.getState("HI"));
+        Optional<SalesTax> salesTax1 = salesTaxRepository.findBy("HI");
         assertEquals(salesTax1.get(), salesTax);
 
     }

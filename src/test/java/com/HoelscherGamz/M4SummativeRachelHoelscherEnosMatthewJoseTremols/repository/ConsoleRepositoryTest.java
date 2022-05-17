@@ -27,7 +27,7 @@ public class ConsoleRepositoryTest {
     }
 
     @Test
-    public void addGetDeleteConsole() {
+    public void shouldAddGetDeleteConsole() {
         Console console = new Console();
         console.setConsole_id(1L);
         console.setModel("PS5");
@@ -52,7 +52,7 @@ public class ConsoleRepositoryTest {
     }
 
     @Test
-    public void updateConsole() {
+    public void shouldUpdateConsole() {
         Console console = new Console();
         console.setConsole_id(1L);
         console.setModel("PS5");
@@ -79,7 +79,7 @@ public class ConsoleRepositoryTest {
     }
 
     @Test
-    public void getAllConsoles() {
+    public void shouldGetAllConsoles() {
 
         Console console = new Console();
         console.setConsole_id(1L);
