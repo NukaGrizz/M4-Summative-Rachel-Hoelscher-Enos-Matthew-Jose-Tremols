@@ -42,6 +42,16 @@ public class Console {
     private int quantity;
 
 
+    public Console(Long console_id, String model, String manufacturer, String memory_amount, String processor, BigDecimal price, int quantity) {
+        this.console_id = console_id;
+        this.model = model;
+        this.manufacturer = manufacturer;
+        this.memory_amount = memory_amount;
+        this.processor = processor;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
     public Long getConsole_id() {
         return console_id;
     }
@@ -65,7 +75,6 @@ public class Console {
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
-
 
     public String getMemory_amount() {
         return memory_amount;
@@ -96,16 +105,6 @@ public class Console {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Console(Long console_id, String model, String manufacturer, String memory_amount, String processor, BigDecimal price, int quantity) {
-        this.console_id = console_id;
-        this.model = model;
-        this.manufacturer = manufacturer;
-        this.memoryAmount = memory_amount;
-        this.processor = processor;
-        this.price = price;
         this.quantity = quantity;
     }
 
