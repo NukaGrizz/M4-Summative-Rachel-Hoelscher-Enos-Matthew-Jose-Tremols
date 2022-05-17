@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
-public interface GameRespository extends JpaRepository<Game, Long> {
+public interface GameRepository extends JpaRepository<Game, Long> {
 
     List<Invoice> findAllGamesByTitle(String title);
     List<Invoice> findAllGamesByRating(String esrb_rating);
