@@ -2,7 +2,6 @@ package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repos
 
 
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Game;
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Invoice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +11,9 @@ import java.util.List;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
 
-    List<Invoice> findAllGamesByTitle(String title);
-    List<Invoice> findAllGamesByRating(String esrb_rating);
-    List<Invoice> findAllGamesByDescription(String description);
-    List<Invoice> findAllGamesByPrice(BigDecimal price);
-    List<Invoice> findAllGamesByStudio(String studio);
+    List<Game> findAllGamesByTitle(String title);
+    List<Game> findAllGamesByRating(String esrb_rating);
+    List<Game> findAllGamesByDescription(String description);
+    List<Game> findAllGamesByPrice(BigDecimal price);
+    List<Game> findAllGamesByStudio(String studio);
 }
