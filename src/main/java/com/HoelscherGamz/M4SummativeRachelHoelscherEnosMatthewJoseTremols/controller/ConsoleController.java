@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ public class ConsoleController {
     ServiceLayer serviceLayer;
 
     //Get all consoles
-    @GetMapping(value = "/")
+    @GetMapping
     public List<Console> getAllConsoles() {
         return serviceLayer.findAllConsole();
     }
@@ -32,13 +33,15 @@ public class ConsoleController {
 
     //Create console
     @PostMapping
-    public Console createConsole(@RequestBody Console console) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Console createConsole(@RequestBody @Valid Console console) {
         Console returnConsole = serviceLayer.saveConsole(console);
         return returnConsole;
     }
 
     //Update console
     @PutMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateConsole(@RequestBody Console console, @PathVariable long id) {
         if (console.getConsole_id() == null) {
             console.setConsole_id(id);
@@ -52,6 +55,7 @@ public class ConsoleController {
 
     //Delete by id
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteConsole(@PathVariable long id) {
         serviceLayer.removeConsole(id);
     }
