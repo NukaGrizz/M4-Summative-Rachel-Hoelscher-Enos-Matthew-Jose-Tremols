@@ -17,7 +17,7 @@ public class TShirt {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    private Long id;
+    private Long t_shirt_id;
 
     @NotNull
     @Column(length = 20)
@@ -38,28 +38,12 @@ public class TShirt {
     @NotNull
     private int quantity;
 
-
-    public TShirt(Long id, String size, String color, String description, BigDecimal price, int quantity) {
-
-        this.id = id;
-        this.size = size;
-        this.color = color;
-        this.description = description;
-        this.price = price;
-        this.quantity = quantity;
+    public Long getT_shirt_id() {
+        return t_shirt_id;
     }
 
-
-    public TShirt() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setT_shirt_id(Long t_shirt_id) {
+        this.t_shirt_id = t_shirt_id;
     }
 
     public String getSize() {
@@ -102,27 +86,35 @@ public class TShirt {
         this.quantity = quantity;
     }
 
+    public TShirt(Long t_shirt_id, String size, String color, String description, BigDecimal price, int quantity) {
+        this.t_shirt_id = t_shirt_id;
+        this.size = size;
+        this.color = color;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         TShirt tShirt = (TShirt) o;
-        return quantity == tShirt.quantity && Objects.equals(id, tShirt.id) && Objects.equals(size, tShirt.size) && Objects.equals(color, tShirt.color) && Objects.equals(description, tShirt.description) && Objects.equals(price, tShirt.price);
 
+        return quantity == tShirt.quantity && Objects.equals(t_shirt_id, tShirt.t_shirt_id) && Objects.equals(size, tShirt.size) && Objects.equals(color, tShirt.color) && Objects.equals(description, tShirt.description) && Objects.equals(price, tShirt.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, size, color, description, price, quantity);
+        return Objects.hash(t_shirt_id, size, color, description, price, quantity);
     }
 
     @Override
     public String toString() {
 
         return "TShirt{" +
-
-                "id=" + id +
+                "t_shirt_id=" + t_shirt_id +
                 ", size='" + size + '\'' +
                 ", color='" + color + '\'' +
                 ", description='" + description + '\'' +

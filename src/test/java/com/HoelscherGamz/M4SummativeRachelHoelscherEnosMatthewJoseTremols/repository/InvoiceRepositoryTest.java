@@ -41,9 +41,9 @@ public class InvoiceRepositoryTest {
     /*
 
         @Test
-    public void addGetDeleteAlbum() {
+    public void addGetDeleteGameInvoice() {
 
-        // Need to create a Label and an Artist first
+        // Need to create a Game and select a Sales Tax first
         Label label = new Label();
         label.setName("A&M");
         label.setWebsite("www.aandm.com");
