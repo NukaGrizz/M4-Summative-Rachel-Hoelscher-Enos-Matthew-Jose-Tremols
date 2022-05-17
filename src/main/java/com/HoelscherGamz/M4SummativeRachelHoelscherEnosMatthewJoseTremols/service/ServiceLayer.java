@@ -2,7 +2,8 @@ package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.servi
 
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Console;
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Game;
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.TShirts;
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.TShirt;
+
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,7 +32,11 @@ public class ServiceLayer {
         this.salesTaxRepository = salesTaxRepository;
     }
 
+    //
     //CRUD OPERATIONS FOR CONSOLE
+    //
+
+    //Create new Console
     @Transactional
     public Console saveConsole(Console console) {
 
@@ -48,14 +53,16 @@ public class ServiceLayer {
         return  console;
     }
 
+    //Find Console By Id
     public Console findConsole(Long id) {
 
-        // Get the album object first
+        // Get the console object first
         Optional<Console> console = consoleRepository.findById(id);
 
         return console.isPresent() ? console.get() : null;
     }
 
+    // find All consoles
     public List<Console> findAllConsole() {
 
         List<Console> consoleList = consoleRepository.findAll();
@@ -63,16 +70,18 @@ public class ServiceLayer {
         return consoleList;
     }
 
+    //Find Console By Manufacturer
     public List<Console> findByManufacturer(String manufacturer){
         return consoleRepository.findByManufacturer(manufacturer);
     }
 
-
+    //Update console
     @Transactional
     public void updateConsole(Console console) {
 
         // Update the console information
         Console c = new Console();
+        c.setId(console.getId());
         c.setModel(console.getModel());
         c.setManufacturer(console.getManufacturer());
         c.setMemoryAmount(console.getMemoryAmount());
@@ -82,6 +91,7 @@ public class ServiceLayer {
         consoleRepository.save(c);
     }
 
+    //Detele the Console
     @Transactional
     public void removeConsole(Long id) {
         // Remove Console
@@ -131,6 +141,7 @@ public class ServiceLayer {
     @Transactional
     public void updateGame(Game game) {
         Game g = new Game();
+        g.setGameId(game.getGameId());
         g.setTitle(game.getTitle());
         g.setEsrb_rating(game.getEsrb_rating());
         g.setDescription(game.getDescription());
@@ -167,13 +178,65 @@ public class ServiceLayer {
     //CRUD OPERATIONS FOR TSHIRT
     //
 
+    //Create new tshirt
+    @Transactional
+    public TShirt saveTShirt(TShirt tshirt) {
+
+        // Persist console
+        TShirt t = new TShirt();
+        t.setColor(tshirt.getColor());
+        t.setDescription(tshirt.getDescription());
+        t.setPrice(tshirt.getPrice());
+        t.setSize(tshirt.getSize());
+        t.setQuantity(tshirt.getQuantity());
+        tShirtRepository.save(t);
+        tshirt.setId(t.getId());
+        return tshirt;
+    }
+
+    //Get game by id
+    public TShirt findTShirt(Long id) {
+
+        // Get the game object first
+        Optional<TShirt> tShirt = tShirtRepository.findById(id);
+
+        return tShirt.isPresent() ? tShirt.get() : null;
+    }
+
+    //Get all TShirts
+    public List<TShirt> findAllTShirt() {
+
+        List<TShirt> tShirtList = tShirtRepository.findAll();
+
+        return tShirtList;
+    }
+
+    // Update TShirt information
+    @Transactional
+    public void updateTShirt(TShirt tShirt) {
+        TShirt t = new TShirt();
+        t.setId(tShirt.getId());
+        t.setColor(tShirt.getColor());
+        t.setDescription(tShirt.getDescription());
+        t.setPrice(tShirt.getPrice());
+        t.setSize(tShirt.getSize());
+        t.setQuantity(tShirt.getQuantity());
+        tShirtRepository.save(t);
+    }
+
+    // Delete Game
+    @Transactional
+    public void removeTShirt(Long id) {
+        tShirtRepository.deleteById(id);
+    }
+
     //Search for T-shirts by color.
-    public List<TShirts> findByColor(String color){
+    public List<TShirt> findByColor(String color){
         return tShirtRepository.findByColor(color);
     }
 
     //Search for T-shirts by size.
-    public List<TShirts> findBySize(String size){
+    public List<TShirt> findBySize(String size){
         return tShirtRepository.findBySize(size);
     }
 
