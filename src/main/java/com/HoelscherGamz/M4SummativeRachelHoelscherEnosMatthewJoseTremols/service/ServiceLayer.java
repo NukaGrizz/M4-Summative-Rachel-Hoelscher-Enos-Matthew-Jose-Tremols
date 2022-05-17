@@ -2,6 +2,7 @@ package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.servi
 
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Console;
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Game;
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Invoice;
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.TShirt;
 
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repository.*;
@@ -175,10 +176,10 @@ public class ServiceLayer {
 
 
     //
-    //CRUD OPERATIONS FOR TSHIRT
+    //CRUD OPERATIONS FOR TShirt
     //
 
-    //Create new tshirt
+    //Create new TShirt
     @Transactional
     public TShirt saveTShirt(TShirt tshirt) {
 
@@ -194,10 +195,9 @@ public class ServiceLayer {
         return tshirt;
     }
 
-    //Get game by id
+    //Get TShirt by id
     public TShirt findTShirt(Long id) {
 
-        // Get the game object first
         Optional<TShirt> tShirt = tShirtRepository.findById(id);
 
         return tShirt.isPresent() ? tShirt.get() : null;
@@ -224,7 +224,7 @@ public class ServiceLayer {
         tShirtRepository.save(t);
     }
 
-    // Delete Game
+    // Delete TShirt
     @Transactional
     public void removeTShirt(Long id) {
         tShirtRepository.deleteById(id);
@@ -241,10 +241,77 @@ public class ServiceLayer {
     }
 
 
-
     //
     //CRUD OPERATIONS FOR INVOICE
     //
+
+    //Create New Invoice
+    @Transactional
+    public Invoice saveInvoice(Invoice invoice) {
+
+        // Persist invoice
+        Invoice i = new Invoice();
+        i.setName(invoice.getName());
+        i.setStreet(invoice.getStreet());
+        i.setCity(invoice.getCity());
+        i.setState(invoice.getState());
+        i.setZipcode(invoice.getZipcode());
+        i.setItemType(invoice.getItemType());
+        i.setItemId(invoice.getItemId());
+        i.setUnit_price(invoice.getUnit_price());
+        i.setQuantity(invoice.getQuantity());
+        i.setSubtotal(invoice.getSubtotal());
+        i.setTax(invoice.getTax());
+        i.setProcessing_fee(invoice.getProcessing_fee());
+        i.setTotal(invoice.getTotal());
+        invoiceRepository.save(i);
+        invoice.setInvoice_id(i.getInvoice_id());
+        return invoice;
+    }
+
+    //Get Invoice by id
+    public Invoice findInovice(Long id) {
+
+        // Get the game object first
+        Optional<Invoice> invoice = invoiceRepository.findById(id);
+
+        return invoice.isPresent() ? invoice.get() : null;
+    }
+
+    //Get all Invoices
+    public List<Invoice> findAllInvoice() {
+
+        List<Invoice> invoiceList = invoiceRepository.findAll();
+
+        return invoiceList;
+    }
+
+    // Update Invoice information
+    @Transactional
+    public void updateInvoice(Invoice invoice) {
+        Invoice i = new Invoice();
+        i.setInvoice_id(invoice.getInvoice_id());
+        i.setName(invoice.getName());
+        i.setStreet(invoice.getStreet());
+        i.setCity(invoice.getCity());
+        i.setState(invoice.getState());
+        i.setZipcode(invoice.getZipcode());
+        i.setItemType(invoice.getItemType());
+        i.setItemId(invoice.getItemId());
+        i.setUnit_price(invoice.getUnit_price());
+        i.setQuantity(invoice.getQuantity());
+        i.setSubtotal(invoice.getSubtotal());
+        i.setTax(invoice.getTax());
+        i.setProcessing_fee(invoice.getProcessing_fee());
+        i.setTotal(invoice.getTotal());
+        invoiceRepository.save(i);
+    }
+
+    // Delete Invoice
+    @Transactional
+    public void removeInvoice(Long id) {
+        invoiceRepository.deleteById(id);
+    }
 
 
     //
