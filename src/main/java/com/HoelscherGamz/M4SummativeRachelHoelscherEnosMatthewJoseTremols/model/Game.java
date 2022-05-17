@@ -15,7 +15,6 @@ public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Long game_id;
 
     @NotNull
@@ -35,6 +34,7 @@ public class Game {
     private BigDecimal price;
 
     @NotNull
+    @Column(length = 50)
     private String studio;
 
     @NotNull
@@ -93,16 +93,6 @@ public class Game {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Game(Long game_id, String title, String esrb_rating, String description, BigDecimal price, String studio, int quantity) {
-        this.game_id = game_id;
-        this.title = title;
-        this.esrb_rating = esrb_rating;
-        this.description = description;
-        this.price = price;
-        this.studio = studio;
         this.quantity = quantity;
     }
 

@@ -67,6 +67,23 @@ public class Invoice {
     @Digits(integer = 5, fraction = 2)
     private BigDecimal total;
 
+    public Invoice(Long invoice_id, String name, String street, String city, String state, String zipcode, String item_type, Long item_id, BigDecimal unit_price, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processing_fee, BigDecimal total) {
+        this.invoice_id = invoice_id;
+        this.name = name;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
+        this.item_type = item_type;
+        this.item_id = item_id;
+        this.unit_price = unit_price;
+        this.quantity = quantity;
+        this.subtotal = subtotal;
+        this.tax = tax;
+        this.processing_fee = processing_fee;
+        this.total = total;
+    }
+
     public Long getInvoice_id() {
         return invoice_id;
     }
@@ -176,23 +193,6 @@ public class Invoice {
     }
 
     public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    public Invoice(Long invoice_id, String name, String street, String city, String state, String zipcode, String item_type, Long item_id, BigDecimal unit_price, int quantity, BigDecimal subtotal, BigDecimal tax, BigDecimal processing_fee, BigDecimal total) {
-        this.invoice_id = invoice_id;
-        this.name = name;
-        this.street = street;
-        this.city = city;
-        this.state = state;
-        this.zipcode = zipcode;
-        this.item_type = item_type;
-        this.item_id = item_id;
-        this.unit_price = unit_price;
-        this.quantity = quantity;
-        this.subtotal = subtotal;
-        this.tax = tax;
-        this.processing_fee = processing_fee;
         this.total = total;
     }
 
