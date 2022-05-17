@@ -1,8 +1,6 @@
 package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repository;
 
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.TShirt;
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Tshirt;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +26,9 @@ public class TShirtRepositoryTest {
     }
 
     @Test
-    public void addGetDeleteConsole() {
+    public void addGetDeleteTShirt() {
         TShirt tShirt = new TShirt();
-        tShirt.setId(1L);
+        tShirt.setT_shirt_id(1L);
         tShirt.setSize("Large");
         tShirt.setColor("Blue");
         tShirt.setDescription("Men's 100% Smash Bros Shirt");
@@ -43,9 +41,9 @@ public class TShirtRepositoryTest {
 
         assertEquals(tshirt1.get(), tShirt);
 
-        tShirtRepository.deleteById(tShirt.getId());
+        tShirtRepository.deleteById(tShirt.getT_shirt_id());
 
-        tshirt1 = tShirtRepository.findById(tShirt.getId());
+        tshirt1 = tShirtRepository.findById(tShirt.getT_shirt_id());
 
         assertFalse(tshirt1.isPresent());
 
@@ -54,7 +52,7 @@ public class TShirtRepositoryTest {
     @Test
     public void updateTShirt() {
         TShirt tShirt = new TShirt();
-        tShirt.setId(1L);
+        tShirt.setT_shirt_id(1L);
         tShirt.setSize("Large");
         tShirt.setColor("Blue");
         tShirt.setDescription("Men's 100% Smash Bros Shirt");
@@ -80,7 +78,7 @@ public class TShirtRepositoryTest {
     public void getAllTShirts() {
 
         TShirt tShirt = new TShirt();
-        tShirt.setId(1L);
+        tShirt.setT_shirt_id(1L);
         tShirt.setSize("Large");
         tShirt.setColor("Blue");
         tShirt.setDescription("Men's 100% Smash Bros Shirt");
@@ -90,7 +88,7 @@ public class TShirtRepositoryTest {
         tShirt = tShirtRepository.save(tShirt);
 
         tShirt = new TShirt();
-        tShirt.setId(2L);
+        tShirt.setT_shirt_id(2L);
         tShirt.setSize("Medium");
         tShirt.setColor("Green");
         tShirt.setDescription("Women's Horizon Zero Dawn t-shirt");

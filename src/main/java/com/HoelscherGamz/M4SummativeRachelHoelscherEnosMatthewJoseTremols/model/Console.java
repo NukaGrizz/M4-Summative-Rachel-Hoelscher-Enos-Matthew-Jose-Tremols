@@ -9,37 +9,38 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @Table(name = "console")
-    public class Console {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "console")
+public class Console {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        @NotNull
-        private Long console_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull
+    private Long console_id;
 
-        @NotNull
-        @Column(length = 50)
-        private String model;
+    @NotNull
+    @Column(length = 50)
+    private String model;
 
-        @NotNull
-        @Column(length = 50)
-        private String manufacturer;
+    @NotNull
+    @Column(length = 50)
+    private String manufacturer;
 
-        @NotNull
-        @Column(length = 20)
-        private String memory_amount;
+    @NotNull
+    @Column(length = 20)
+    private String memory_amount;
 
-        @NotNull
-        @Column(length = 20)
-        private String processor;
+    @NotNull
+    @Column(length = 20)
+    private String processor;
 
-        @NotNull
-        @Digits(integer = 5, fraction = 2)
-        private BigDecimal price;
+    @NotNull
+    @Digits(integer = 5, fraction = 2)
+    private BigDecimal price;
 
-        @NotNull
-        private int quantity;
+    @NotNull
+    private int quantity;
+
 
     public Long getConsole_id() {
         return console_id;
@@ -64,6 +65,7 @@ import java.util.Objects;
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
+
 
     public String getMemory_amount() {
         return memory_amount;
@@ -94,6 +96,16 @@ import java.util.Objects;
     }
 
     public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Console(Long console_id, String model, String manufacturer, String memory_amount, String processor, BigDecimal price, int quantity) {
+        this.console_id = console_id;
+        this.model = model;
+        this.manufacturer = manufacturer;
+        this.memoryAmount = memory_amount;
+        this.processor = processor;
+        this.price = price;
         this.quantity = quantity;
     }
 
