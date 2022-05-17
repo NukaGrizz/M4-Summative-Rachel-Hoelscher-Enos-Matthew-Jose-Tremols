@@ -110,7 +110,7 @@ public class ServiceLayer {
         // Persist console
         Game g = new Game();
         g.setTitle(game.getTitle());
-        g.setEsrb_rating(game.getEsrb_rating());
+        g.setEsrbRating(game.getEsrbRating());
         g.setDescription(game.getDescription());
         g.setPrice(game.getPrice());
         g.setStudio(game.getStudio());
@@ -143,7 +143,7 @@ public class ServiceLayer {
         Game g = new Game();
         g.setGame_id(game.getGame_id(1L));
         g.setTitle(game.getTitle());
-        g.setEsrb_rating(game.getEsrb_rating());
+        g.setEsrbRating(game.getEsrbRating());
         g.setDescription(game.getDescription());
         g.setPrice(game.getPrice());
         g.setStudio(game.getStudio());
@@ -164,7 +164,7 @@ public class ServiceLayer {
 
     //Search for games by ESBR_Rating
     public List<Game> findByRating(String rating){
-        return gameRepository.findAllGamesByRating(rating);
+        return gameRepository.findAllGamesByEsrbRating(rating);
     }
 
     //Search for games by Title
