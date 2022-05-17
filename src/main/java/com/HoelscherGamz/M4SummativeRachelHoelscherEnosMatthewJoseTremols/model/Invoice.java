@@ -85,6 +85,9 @@ public class Invoice {
         this.total = total;
     }
 
+    public Invoice() {
+    }
+
     public Long getInvoice_id() {
         return invoice_id;
     }
