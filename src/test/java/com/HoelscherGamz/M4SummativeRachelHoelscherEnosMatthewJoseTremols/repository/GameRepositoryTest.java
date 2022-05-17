@@ -78,30 +78,32 @@ public class GameRepositoryTest {
     }
 
     @Test
-    public void getAllConsoles() {
+    public void getAllGames() {
 
-        Console console = new Console();
-        console.setConsole_id(1L);
-        console.setModel("PS5");
-        console.setManufacturer("Sony");
-        console.setMemory_amount("825 GB");
-        console.setProcessor("AMD Zen 2 CPU");
-        console.setPrice(BigDecimal.valueOf(499.99));
-        console.setQuantity(100);
+        Game game = new Game();
+        game.getGame_id(1L);
+        game.setTitle("Breath of the Wild");
+        game.setEsrb_rating("E10+");
+        game.setDescription("The player controls an amnesiac Link, who awakens from a hundred-year slumber, and attempts to regain his memories and prevent the destruction of Hyrule by Calamity Ganon.");
+        game.setStudio("Nintendo");
+        game.setPrice(BigDecimal.valueOf(40.99));
+        game.setQuantity(150);
 
-        console = consoleRepository.save(console);
+        game = gameRepository.save(game);
 
-        console = new Console();
-        console.setModel("XBox Series X");
-        console.setManufacturer("Microsoft");
-        console.setMemory_amount("1TB");
-        console.setProcessor("AMD Zen 2 CPU");
-        console.setPrice(BigDecimal.valueOf(550.99));
-        console.setQuantity(200);
+        game = new Game();
+        game.getGame_id(2L);
+        game.setTitle("Resident Evil Village");
+        game.setEsrb_rating("M17+");
+        game.setDescription("Players control Ethan Winters, who searches for his kidnapped daughter in a village filled with mutant creatures. ");
+        game.setStudio("Capcom");
+        game.setPrice(BigDecimal.valueOf(35.99));
+        game.setQuantity(150);
+        gameRepository.save(game);
 
-        console = consoleRepository.save(console);
+        game = gameRepository.save(game);
 
-        List<Console> aList = consoleRepository.findAll();
+        List<Game> aList = gameRepository.findAll();
         assertEquals(aList.size(), 2);
 
     }
