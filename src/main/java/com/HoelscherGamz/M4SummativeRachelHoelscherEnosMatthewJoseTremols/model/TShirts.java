@@ -10,8 +10,8 @@ import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name="tShirt")
-public class TShirt {
+@Table(name="tShirts")
+public class TShirts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,7 +37,7 @@ public class TShirt {
     @NotNull
     private int quantity;
 
-    public TShirt(Long id, String size, String color, String description, BigDecimal price, int quantity) {
+    public TShirts(Long id, String size, String color, String description, BigDecimal price, int quantity) {
         this.id = id;
         this.size = size;
         this.color = color;
@@ -46,7 +46,7 @@ public class TShirt {
         this.quantity = quantity;
     }
 
-    public TShirt() {
+    public TShirts() {
     }
 
     public Long getId() {
@@ -101,8 +101,8 @@ public class TShirt {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TShirt tShirt = (TShirt) o;
-        return quantity == tShirt.quantity && Objects.equals(id, tShirt.id) && Objects.equals(size, tShirt.size) && Objects.equals(color, tShirt.color) && Objects.equals(description, tShirt.description) && Objects.equals(price, tShirt.price);
+        TShirts tShirts = (TShirts) o;
+        return quantity == tShirts.quantity && Objects.equals(id, tShirts.id) && Objects.equals(size, tShirts.size) && Objects.equals(color, tShirts.color) && Objects.equals(description, tShirts.description) && Objects.equals(price, tShirts.price);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class TShirt {
 
     @Override
     public String toString() {
-        return "TShirt{" +
+        return "TShirts{" +
                 "id=" + id +
                 ", size='" + size + '\'' +
                 ", color='" + color + '\'' +
