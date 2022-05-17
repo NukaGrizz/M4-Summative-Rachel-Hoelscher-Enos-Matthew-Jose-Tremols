@@ -41,7 +41,6 @@ public class Console {
     @NotNull
     private int quantity;
 
-
     public Console(Long console_id, String model, String manufacturer, String memory_amount, String processor, BigDecimal price, int quantity) {
         this.console_id = console_id;
         this.model = model;
@@ -50,6 +49,10 @@ public class Console {
         this.processor = processor;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public Console(){
+
     }
 
     public Long getConsole_id() {

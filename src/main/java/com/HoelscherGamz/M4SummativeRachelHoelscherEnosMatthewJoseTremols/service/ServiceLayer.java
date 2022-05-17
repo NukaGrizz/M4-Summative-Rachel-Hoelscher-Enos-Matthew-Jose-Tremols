@@ -44,12 +44,12 @@ public class ServiceLayer {
         Console c = new Console();
         c.setModel(console.getModel());
         c.setManufacturer(console.getManufacturer());
-        c.setMemoryAmount(console.getMemoryAmount());
+        c.setMemory_amount(console.getMemory_amount());
         c.setProcessor(console.getProcessor());
         c.setPrice(console.getPrice());
         c.setQuantity(console.getQuantity());
         consoleRepository.save(c);
-        console.setId(c.getId());
+        console.setConsole_id(c.getConsole_id());
         return  console;
     }
 
@@ -81,10 +81,10 @@ public class ServiceLayer {
 
         // Update the console information
         Console c = new Console();
-        c.setId(console.getId());
+        c.setConsole_id(console.getConsole_id());
         c.setModel(console.getModel());
         c.setManufacturer(console.getManufacturer());
-        c.setMemoryAmount(console.getMemoryAmount());
+        c.setMemory_amount(console.getMemory_amount());
         c.setProcessor(console.getProcessor());
         c.setPrice(console.getPrice());
         c.setQuantity(console.getQuantity());
@@ -116,7 +116,7 @@ public class ServiceLayer {
         g.setStudio(game.getStudio());
         g.setQuantity(game.getQuantity());
         gameRepository.save(g);
-        game.setGameId(g.getGameId());
+        game.setGame_id(g.getGame_id(1L));
         return game;
     }
 
@@ -141,7 +141,7 @@ public class ServiceLayer {
     @Transactional
     public void updateGame(Game game) {
         Game g = new Game();
-        g.setGameId(game.getGameId());
+        g.setGame_id(game.getGame_id(1L));
         g.setTitle(game.getTitle());
         g.setEsrb_rating(game.getEsrb_rating());
         g.setDescription(game.getDescription());
@@ -190,7 +190,7 @@ public class ServiceLayer {
         t.setSize(tshirt.getSize());
         t.setQuantity(tshirt.getQuantity());
         tShirtRepository.save(t);
-        tshirt.setId(t.getId());
+        tshirt.setT_shirt_id(t.getT_shirt_id());
         return tshirt;
     }
 
@@ -215,7 +215,7 @@ public class ServiceLayer {
     @Transactional
     public void updateTShirt(TShirt tShirt) {
         TShirt t = new TShirt();
-        t.setId(tShirt.getId());
+        t.setT_shirt_id(tShirt.getT_shirt_id());
         t.setColor(tShirt.getColor());
         t.setDescription(tShirt.getDescription());
         t.setPrice(tShirt.getPrice());

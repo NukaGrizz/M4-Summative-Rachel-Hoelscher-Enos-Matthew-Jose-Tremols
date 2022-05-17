@@ -38,6 +38,19 @@ public class TShirt {
     @NotNull
     private int quantity;
 
+    public TShirt(Long t_shirt_id, String size, String color, String description, BigDecimal price, int quantity) {
+        this.t_shirt_id = t_shirt_id;
+        this.size = size;
+        this.color = color;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public TShirt() {
+
+    }
+
     public Long getT_shirt_id() {
         return t_shirt_id;
     }
@@ -58,9 +71,7 @@ public class TShirt {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
+    public void setColor(String color) { this.color = color; }
 
     public String getDescription() {
         return description;
@@ -83,15 +94,6 @@ public class TShirt {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public TShirt(Long t_shirt_id, String size, String color, String description, BigDecimal price, int quantity) {
-        this.t_shirt_id = t_shirt_id;
-        this.size = size;
-        this.color = color;
-        this.description = description;
-        this.price = price;
         this.quantity = quantity;
     }
 

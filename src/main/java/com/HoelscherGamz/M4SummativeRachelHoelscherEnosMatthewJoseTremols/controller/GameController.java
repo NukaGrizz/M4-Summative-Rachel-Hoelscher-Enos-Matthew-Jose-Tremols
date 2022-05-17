@@ -42,11 +42,11 @@ public class GameController {
     //Update game
     @PutMapping(value = "/{id}")
     public void updateGame(@RequestBody Game game, @PathVariable long id) {
-        if(game.getGameId() == null) {
-            game.setGameId(id);
+        if(game.getGame_id(1L) == null) {
+            game.setGame_id(id);
         }
 
-        if(game.getGameId() != id) {
+        if(game.getGame_id(1L) != id) {
             throw new IllegalArgumentException("Game ID must match parameter given");
         }
         gameRepository.save(game);

@@ -32,14 +32,14 @@ public class ConsoleRepositoryTest {
         console.setConsole_id(1L);
         console.setModel("PS5");
         console.setManufacturer("Sony");
-        console.setMemoryAmount("825 GB");
+        console.setMemory_amount("825 GB");
         console.setProcessor("AMD Zen 2 CPU");
         console.setPrice(BigDecimal.valueOf(499.99));
         console.setQuantity(100);
 
         console = consoleRepository.save(console);
 
-        Optional<Console> console1 = consoleRepository.findById(console.getId());
+        Optional<Console> console1 = consoleRepository.findById(console.getConsole_id());
 
         assertEquals(console1.get(), console);
 
@@ -57,7 +57,7 @@ public class ConsoleRepositoryTest {
         console.setConsole_id(1L);
         console.setModel("PS5");
         console.setManufacturer("Sony");
-        console.setMemoryAmount("825 GB");
+        console.setMemory_amount("825 GB");
         console.setProcessor("AMD Zen 2 CPU");
         console.setPrice(BigDecimal.valueOf(499.99));
         console.setQuantity(100);
@@ -66,14 +66,14 @@ public class ConsoleRepositoryTest {
 
         console.setModel("PS6");
         console.setManufacturer("Sega");
-        console.setMemoryAmount("1 TB");
+        console.setMemory_amount("1 TB");
         console.setProcessor("AMD Zen 3 CPU");
         console.setPrice(BigDecimal.valueOf(549.99));
         console.setQuantity(50);
 
         consoleRepository.save(console);
 
-        Optional<console> console1 = consoleRepository.findById(console.getId());
+        Optional<Console> console1 = consoleRepository.findById(console.getConsole_id());
         assertEquals(console1.get(), console);
 
     }
@@ -85,7 +85,7 @@ public class ConsoleRepositoryTest {
         console.setConsole_id(1L);
         console.setModel("PS5");
         console.setManufacturer("Sony");
-        console.setMemoryAmount("825 GB");
+        console.setMemory_amount("825 GB");
         console.setProcessor("AMD Zen 2 CPU");
         console.setPrice(BigDecimal.valueOf(499.99));
         console.setQuantity(100);
@@ -96,7 +96,7 @@ public class ConsoleRepositoryTest {
         console.setConsole_id(2L);
         console.setModel("XBox Series X");
         console.setManufacturer("Microsoft");
-        console.setMemoryAmount("1TB");
+        console.setMemory_amount("1TB");
         console.setProcessor("AMD Zen 2 CPU");
         console.setPrice(BigDecimal.valueOf(550.99));
         console.setQuantity(200);

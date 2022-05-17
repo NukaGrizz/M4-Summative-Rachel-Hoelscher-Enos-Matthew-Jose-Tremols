@@ -37,7 +37,7 @@ public class TShirtRepositoryTest {
 
         tShirt = tShirtRepository.save(tShirt);
 
-        Optional<TShirt> tshirt1 = tShirtRepository.findById(tShirt.getId());
+        Optional<TShirt> tshirt1 = tShirtRepository.findById(tShirt.getT_shirt_id());
 
         assertEquals(tshirt1.get(), tShirt);
 
@@ -69,7 +69,7 @@ public class TShirtRepositoryTest {
 
         tShirtRepository.save(tShirt);
 
-        Optional<tShirt> tShirt1 = tShirtRepository.findById(tShirt.getId());
+        Optional<TShirt> tShirt1 = tShirtRepository.findById(tShirt.getT_shirt_id());
         assertEquals(tShirt1.get(), tShirt);
 
     }
