@@ -35,13 +35,13 @@ public class GameTest {
 
     @Test
     public void getEsrb_rating() {
-        assertEquals(Optional.of("Everyone 10+"),Optional.of(gameTester.getEsrb_rating()));
+        assertEquals(Optional.of("Everyone 10+"),Optional.of(gameTester.getEsrbRating()));
     }
 
     @Test
     public void setEsrb_rating() {
-        gameTester.setEsrb_rating("Teen");
-        assertEquals(Optional.of("Teen"),Optional.of(gameTester.getEsrb_rating()));
+        gameTester.setEsrbRating("Teen");
+        assertEquals(Optional.of("Teen"),Optional.of(gameTester.getEsrbRating()));
     }
 
     @Test
