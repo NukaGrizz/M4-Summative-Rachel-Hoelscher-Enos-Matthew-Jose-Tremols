@@ -72,7 +72,7 @@ public class TShirtControllerTest {
         //GET all mock
         List<TShirt> tShirtList = Arrays.asList(mockOutput, createOutput, createInput);
 
-        doReturn(tShirtList).when(serviceLayer).findAllConsole();
+        doReturn(tShirtList).when(serviceLayer).findAllTShirt();
 
 
     }
