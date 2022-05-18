@@ -10,13 +10,13 @@ import java.util.Objects;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-@Table(name="tShirts")
-public class TShirts {
+@Table(name="tShirt")
+public class TShirt {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
-    private Long id;
+    private Long t_shirt_id;
 
     @NotNull
     @Column(length = 20)
@@ -37,8 +37,8 @@ public class TShirts {
     @NotNull
     private int quantity;
 
-    public TShirts(Long id, String size, String color, String description, BigDecimal price, int quantity) {
-        this.id = id;
+    public TShirt(Long t_shirt_id, String size, String color, String description, BigDecimal price, int quantity) {
+        this.t_shirt_id = t_shirt_id;
         this.size = size;
         this.color = color;
         this.description = description;
@@ -46,15 +46,16 @@ public class TShirts {
         this.quantity = quantity;
     }
 
-    public TShirts() {
+    public TShirt() {
+
     }
 
-    public Long getId() {
-        return id;
+    public Long getT_shirt_id() {
+        return t_shirt_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setT_shirt_id(Long t_shirt_id) {
+        this.t_shirt_id = t_shirt_id;
     }
 
     public String getSize() {
@@ -69,9 +70,7 @@ public class TShirts {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
+    public void setColor(String color) { this.color = color; }
 
     public String getDescription() {
         return description;
@@ -101,19 +100,22 @@ public class TShirts {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TShirts tShirts = (TShirts) o;
-        return quantity == tShirts.quantity && Objects.equals(id, tShirts.id) && Objects.equals(size, tShirts.size) && Objects.equals(color, tShirts.color) && Objects.equals(description, tShirts.description) && Objects.equals(price, tShirts.price);
+
+        TShirt tShirt = (TShirt) o;
+
+        return quantity == tShirt.quantity && Objects.equals(t_shirt_id, tShirt.t_shirt_id) && Objects.equals(size, tShirt.size) && Objects.equals(color, tShirt.color) && Objects.equals(description, tShirt.description) && Objects.equals(price, tShirt.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, size, color, description, price, quantity);
+        return Objects.hash(t_shirt_id, size, color, description, price, quantity);
     }
 
     @Override
     public String toString() {
-        return "TShirts{" +
-                "id=" + id +
+
+        return "TShirt{" +
+                "t_shirt_id=" + t_shirt_id +
                 ", size='" + size + '\'' +
                 ", color='" + color + '\'' +
                 ", description='" + description + '\'' +

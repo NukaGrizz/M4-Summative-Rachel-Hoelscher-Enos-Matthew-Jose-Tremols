@@ -21,6 +21,10 @@ public class ProcessingFee {
     @Digits(integer = 4,fraction = 2)
     private BigDecimal fee;
 
+    public ProcessingFee() {
+
+    }
+
     public String getProduct_type() {
         return product_type;
     }
