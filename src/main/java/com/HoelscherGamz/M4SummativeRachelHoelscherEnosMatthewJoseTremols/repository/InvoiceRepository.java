@@ -14,6 +14,6 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
     List<Invoice> findAllInvoicesByCity(String city);
     List<Invoice> findAllInvoicesByState(String state);
     List<Invoice> findAllInvoicesByZipcode(String zipcode);
-    List<Invoice> findAllInvoicesByItemType(String item_type);
-    List<Invoice> findAllInvoicesByItemID(Long item_id);
+    List<Invoice> findAllInvoicesByItemType(String itemType);
+    List<Invoice> findAllInvoicesByItemId(Long itemId);
 }

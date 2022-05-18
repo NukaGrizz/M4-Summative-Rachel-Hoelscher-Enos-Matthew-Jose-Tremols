@@ -23,6 +23,10 @@ public class SalesTax {
     @Digits(integer = 3,fraction = 2)
     private BigDecimal rate;
 
+    public SalesTax() {
+
+    }
+
     public String getState() {
         return state;
     }
