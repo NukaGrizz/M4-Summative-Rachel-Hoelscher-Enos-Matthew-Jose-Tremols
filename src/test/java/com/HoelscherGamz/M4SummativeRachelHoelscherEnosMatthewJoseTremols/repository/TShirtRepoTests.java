@@ -54,12 +54,30 @@ public class TShirtRepoTests {
 
     @Test
     public void shouldFindByColor() {
-        //
+        TShirt tShirt1 = repo.save(new TShirt(1L, "Small", "Blue", "Men's 100% Smash Bros Shirt", new BigDecimal("29.99"), 1000));
+        TShirt tShirt2 = repo.save(new TShirt(2L, "Medium", "Blue", "Men's 100% Smash Bros Shirt", new BigDecimal("29.99"), 1000));
+        TShirt tShirt3 = repo.save(new TShirt(3L, "Large", "Blue", "Men's 100% Smash Bros Shirt", new BigDecimal("29.99"), 1000));
+
+        TShirt tShirt4 = repo.save(new TShirt(4L, "Small", "Green+", "Women's Kirby t-shirt", new BigDecimal("35.99"), 1500));
+        TShirt tShirt5 = repo.save(new TShirt(5L, "Medium", "Green+", "Women's Kirby t-shirt", new BigDecimal("35.99"), 1500));
+        TShirt tShirt6 = repo.save(new TShirt(6L, "Large", "Green+", "Women's Kirby t-shirt", new BigDecimal("35.99"), 1500));
+
+        List<TShirt> tShirts = repo.findByColor("Blue");
+        assertEquals(3, tShirts.size());
     }
 
     @Test
     public void shouldFindBySize() {
-        //
+        TShirt tShirt1 = repo.save(new TShirt(1L, "Small", "Blue", "Men's 100% Smash Bros Shirt", new BigDecimal("29.99"), 1000));
+        TShirt tShirt2 = repo.save(new TShirt(2L, "Medium", "Blue", "Men's 100% Smash Bros Shirt", new BigDecimal("29.99"), 1000));
+        TShirt tShirt3 = repo.save(new TShirt(3L, "Large", "Blue", "Men's 100% Smash Bros Shirt", new BigDecimal("29.99"), 1000));
+
+        TShirt tShirt4 = repo.save(new TShirt(4L, "Small", "Green+", "Women's Kirby t-shirt", new BigDecimal("35.99"), 1500));
+        TShirt tShirt5 = repo.save(new TShirt(5L, "Medium", "Green+", "Women's Kirby t-shirt", new BigDecimal("35.99"), 1500));
+        TShirt tShirt6 = repo.save(new TShirt(6L, "Large", "Green+", "Women's Kirby t-shirt", new BigDecimal("35.99"), 1500));
+
+        List<TShirt> tShirts = repo.findBySize("Small");
+        assertEquals(2, tShirts.size());
     }
 
 }

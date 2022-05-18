@@ -35,8 +35,7 @@ public class ConsoleRepoTests {
     @Test
     public void shouldGetAllConsoles() {
         repo.save(new Console(1L, "PS5", "Sony", "825 GB", "AMD Zen 2 CPU", new BigDecimal("499.99"), 100));
-        repo.save(new Console(2L, "George PS6", "Sega", "1 TB","AMD Zen 3 CPU", new BigDecimal("649.99"),50));
-
+        repo.save(new Console(2L, "PS6", "Sony", "1 TB","AMD Zen 3 CPU", new BigDecimal("649.99"),50));
 
         List<Console> consoles = repo.findAll();
         assertEquals(2, consoles.size());
@@ -52,9 +51,13 @@ public class ConsoleRepoTests {
         assertEquals(newManufacturer, updatedConsole.getManufacturer());
     }
 
-//    @Test
-//    public void shouldFindByManufacturer() {
-//        assertEquals("Sony", );
-//    }
+    @Test
+    public void shouldFindByManufacturer() {
+        repo.save(new Console(1L, "PS5", "Sony", "825 GB", "AMD Zen 2 CPU", new BigDecimal("499.99"), 100));
+        repo.save(new Console(2L, "PS6", "Sony", "1 TB","AMD Zen 3 CPU", new BigDecimal("649.99"),50));
+
+        List<Console> consoles = repo.findByManufacturer("Sony");
+        assertEquals(2, consoles.size());
+    }
 
 }

@@ -13,7 +13,6 @@ import java.util.Objects;
 @Table(name="tShirt")
 public class TShirt {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long t_shirt_id;
