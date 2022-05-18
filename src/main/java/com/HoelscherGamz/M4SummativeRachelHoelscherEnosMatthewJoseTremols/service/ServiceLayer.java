@@ -247,7 +247,7 @@ public class ServiceLayer {
 
     //Create New Invoice
     @Transactional
-    public Invoice saveInvoice(Invoice invoice) {
+    public Invoice saveInvoice(Invoice invoice) throws Exception{
 
         // Persist invoice - the following 8 fields are required to create invoice!!
         Invoice i = new Invoice();
@@ -264,7 +264,7 @@ public class ServiceLayer {
             throw new IllegalArgumentException("Invoice Quantity cannot equal 0");
         }
 
-        if(invoice.getState().equals(findSalesTaxRate(invoice.getState()).getState())){
+        if(invoice.getState().equals(findSalesTax(invoice.getState()).getState())){
             throw new IllegalArgumentException("Invoice State not vaild - State value must equal value of a SalesTax state. To see SaleTax states query SaleTax Endpoint to get all entries");
         }
 
@@ -314,7 +314,7 @@ public class ServiceLayer {
         invoice.setSubtotal(i.getSubtotal());
 
         //calculate Tax
-        i.setTax(findSalesTaxRate(invoice.getState()).getRate().multiply(invoice.getSubtotal()));
+        i.setTax(findSalesTax(invoice.getState()).getRate().multiply(invoice.getSubtotal()));
         invoice.setTax(i.getTax());
 
         //get processingfee from findProcessingFee(itemType)
@@ -445,7 +445,7 @@ public class ServiceLayer {
     }
 
     //Get Sales Tax by id->"State"
-    public SalesTax findSalesTaxRate(String state) {
+    public SalesTax findSalesTax(String state) {
 
         // Get the game object first
         Optional<SalesTax> salesTax = salesTaxRepository.findById(state);
@@ -463,7 +463,7 @@ public class ServiceLayer {
 
     // Update Sales Tax information
     @Transactional
-    public void updateSalesTaxRate(SalesTax salesTax) {
+    public void updateSalesTax(SalesTax salesTax) {
         SalesTax s = new SalesTax();
         s.setState(salesTax.getState());
         s.setRate(salesTax.getRate());
