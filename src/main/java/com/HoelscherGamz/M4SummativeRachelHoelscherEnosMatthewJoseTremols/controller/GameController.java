@@ -26,6 +26,7 @@ public class GameController {
 
     //Get game by id
     @GetMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Game getGameById(@PathVariable long id) {
         Game game = serviceLayer.findGame(id);
         return game;
