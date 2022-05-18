@@ -15,6 +15,7 @@ public class TShirt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long t_shirt_id;
 
     @NotNull
