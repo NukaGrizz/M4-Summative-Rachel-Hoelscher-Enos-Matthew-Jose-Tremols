@@ -14,8 +14,7 @@ import java.util.Objects;
 public class Console {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long console_id;
 
     @NotNull

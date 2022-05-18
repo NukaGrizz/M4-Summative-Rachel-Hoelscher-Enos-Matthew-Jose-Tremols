@@ -79,24 +79,24 @@ public class InvoiceTest {
 
     @Test
     public void getItem_type() {
-        assertEquals(Optional.of("Game"),Optional.of(invoiceTester.getItem_type()));
+        assertEquals(Optional.of("Game"),Optional.of(invoiceTester.getItemType()));
     }
 
     @Test
     public void setItem_type() {
-        invoiceTester.setItem_type("Console");
-        assertEquals(Optional.of("Console"),Optional.of(invoiceTester.getItem_type()));
+        invoiceTester.setItemType("Console");
+        assertEquals(Optional.of("Console"),Optional.of(invoiceTester.getItemType()));
     }
 
     @Test
     public void getItem_id() {
-        assertEquals(Optional.of(11L),Optional.of(invoiceTester.getItem_id()));
+        assertEquals(Optional.of(11L),Optional.of(invoiceTester.getItemId()));
     }
 
     @Test
     public void setItem_id() {
-        invoiceTester.setItem_id(13L);
-        assertEquals(Optional.of(13L),Optional.of(invoiceTester.getItem_id()));
+        invoiceTester.setItemId(13L);
+        assertEquals(Optional.of(13L),Optional.of(invoiceTester.getItemId()));
     }
 
     @Test

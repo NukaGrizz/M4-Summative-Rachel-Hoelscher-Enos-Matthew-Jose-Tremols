@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Game {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long game_id;
 
     @NotNull
@@ -54,7 +54,7 @@ public class Game {
 
     }
 
-    public Long getGame_id(long l) {
+    public Long getGame_id() {
         return game_id;
     }
 
