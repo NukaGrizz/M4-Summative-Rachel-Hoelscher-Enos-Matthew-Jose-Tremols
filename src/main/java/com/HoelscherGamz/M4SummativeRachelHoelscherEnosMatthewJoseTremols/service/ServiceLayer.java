@@ -335,7 +335,7 @@ public class ServiceLayer {
     }
 
     //Get Invoice by id
-    public Invoice findInovice(Long id) {
+    public Invoice findInvoice(Long id) {
 
         // Get the game object first
         Optional<Invoice> invoice = invoiceRepository.findById(id);
