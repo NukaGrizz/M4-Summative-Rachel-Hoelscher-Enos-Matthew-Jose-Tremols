@@ -14,7 +14,7 @@ import java.util.Objects;
 public class Invoice {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long invoice_id;
 
     @NotNull
