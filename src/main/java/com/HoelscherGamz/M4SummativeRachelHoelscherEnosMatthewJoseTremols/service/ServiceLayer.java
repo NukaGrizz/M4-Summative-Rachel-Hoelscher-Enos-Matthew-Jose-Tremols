@@ -92,7 +92,7 @@ public class ServiceLayer {
         consoleRepository.save(c);
     }
 
-    //Detele the Console
+    //Delete the Console
     @Transactional
     public void removeConsole(Long id) {
         // Remove Console
@@ -265,7 +265,7 @@ public class ServiceLayer {
         }
 
         if(invoice.getState().equals(findSalesTax(invoice.getState()).getState())){
-            throw new IllegalArgumentException("Invoice State not vaild - State value must equal value of a SalesTax state. To see SaleTax states query SaleTax Endpoint to get all entries");
+            throw new IllegalArgumentException("Invoice State not valid - State value must equal value of a SalesTax state. To see SaleTax states query SaleTax Endpoint to get all entries");
         }
 
         //ensure enough left for order subtract from model quantity remaining and set price
@@ -335,7 +335,7 @@ public class ServiceLayer {
     }
 
     //Get Invoice by id
-    public Invoice findInovice(Long id) {
+    public Invoice findInvoice(Long id) {
 
         // Get the game object first
         Optional<Invoice> invoice = invoiceRepository.findById(id);

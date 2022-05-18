@@ -27,7 +27,7 @@ public class InvoiceController {
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Invoice getInvoiceById(@PathVariable long id) {
-        Invoice invoice = serviceLayer.findInovice(id);
+        Invoice invoice = serviceLayer.findInvoice(id);
         return invoice;
     }
 
