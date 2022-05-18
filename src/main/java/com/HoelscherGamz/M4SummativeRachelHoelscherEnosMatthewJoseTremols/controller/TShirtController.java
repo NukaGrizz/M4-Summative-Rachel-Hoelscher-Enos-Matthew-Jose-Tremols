@@ -1,10 +1,14 @@
 package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.controller;
 
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.TShirts;
+
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.TShirt;
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repository.TShirtRepository;
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,50 +17,49 @@ import java.util.Optional;
 public class TShirtController {
 
     @Autowired
-    TShirtRepository tShirtRepository;
+    ServiceLayer serviceLayer;
 
     //Get all tShirt
-    @GetMapping(value = "/{id}")
-    public List<TShirts> getAllTShirts() {
-        return tShirtRepository.findAll();
+    @GetMapping
+    public List<TShirt> getAllTShirt() {
+        return serviceLayer.findAllTShirt();
     }
 
     //Get tShirt by id
     @GetMapping(value = "/{id}")
-    public TShirts getCarById(@PathVariable int id) {
-        Optional<TShirts> tShirts = tShirtRepository.findById(id);
-
-        if (!tShirts.isPresent()) {
-            return null;
-        }
-
-        return tShirts.get();
+    @ResponseStatus(HttpStatus.OK)
+    public TShirt getTShirtById(@PathVariable long id) {
+       TShirt tShirt = serviceLayer.findTShirt(id);
+        return tShirt;
     }
 
     //Create tShirt
     @PostMapping
-    public TShirts createTShirt(@RequestBody TShirts tShirts) {
-        tShirtRepository.save(tShirts);
-        return tShirts;
+    @ResponseStatus(HttpStatus.CREATED)
+    public TShirt createTShirt(@RequestBody @Valid TShirt tShirt) {
+        TShirt returnTShirt = serviceLayer.saveTShirt(tShirt);
+        return returnTShirt;
     }
 
     //Update tShirt
     @PutMapping(value = "/{id}")
-    public void updateTShirt(@RequestBody TShirts tShirts, @PathVariable long id) {
-        if(tShirts.getId() == null) {
-            tShirts.setId(id);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateTShirt(@RequestBody TShirt tShirt, @PathVariable long id) {
+        if(tShirt.getT_shirt_id() == null) {
+            tShirt.setT_shirt_id(id);
         }
 
-        if(tShirts.getId() != id) {
+        if(tShirt.getT_shirt_id() != id) {
             throw new IllegalArgumentException("TShirt ID must match parameter given");
         }
-        tShirtRepository.save(tShirts);
+        serviceLayer.updateTShirt(tShirt);
     }
 
     //Delete by id
     @DeleteMapping(value = "/{id}")
-    public void deleteTShirt(@PathVariable int id) {
-        tShirtRepository.deleteById(id);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTShirt(@PathVariable long id) {
+        serviceLayer.removeTShirt(id);
     }
 
 
