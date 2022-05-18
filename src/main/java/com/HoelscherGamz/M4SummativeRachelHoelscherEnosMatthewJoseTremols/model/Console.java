@@ -15,7 +15,6 @@ public class Console {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     private Long console_id;
 
     @NotNull

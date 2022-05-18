@@ -16,7 +16,6 @@ public class TShirt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     private Long t_shirt_id;
 
     @NotNull

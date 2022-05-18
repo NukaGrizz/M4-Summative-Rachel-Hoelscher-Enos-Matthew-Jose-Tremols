@@ -117,7 +117,7 @@ public class ServiceLayer {
         g.setStudio(game.getStudio());
         g.setQuantity(game.getQuantity());
         gameRepository.save(g);
-        game.setGame_id(g.getGame_id(1L));
+        game.setGame_id(g.getGame_id());
         return game;
     }
 
@@ -142,7 +142,7 @@ public class ServiceLayer {
     @Transactional
     public void updateGame(Game game) {
         Game g = new Game();
-        g.setGame_id(game.getGame_id(1L));
+        g.setGame_id(game.getGame_id());
         g.setTitle(game.getTitle());
         g.setEsrbRating(game.getEsrbRating());
         g.setDescription(game.getDescription());

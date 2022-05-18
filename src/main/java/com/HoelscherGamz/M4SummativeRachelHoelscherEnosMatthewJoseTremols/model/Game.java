@@ -54,7 +54,7 @@ public class Game {
 
     }
 
-    public Long getGame_id(long l) {
+    public Long getGame_id() {
         return game_id;
     }
 
