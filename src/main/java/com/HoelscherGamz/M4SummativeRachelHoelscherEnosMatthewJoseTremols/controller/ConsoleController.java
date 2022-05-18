@@ -16,7 +16,7 @@ public class ConsoleController {
     @Autowired
     ServiceLayer serviceLayer;
 
-    //Get all consoles
+    //Get all console
     @GetMapping
     public List<Console> getAllConsoles() {
         return serviceLayer.findAllConsole();

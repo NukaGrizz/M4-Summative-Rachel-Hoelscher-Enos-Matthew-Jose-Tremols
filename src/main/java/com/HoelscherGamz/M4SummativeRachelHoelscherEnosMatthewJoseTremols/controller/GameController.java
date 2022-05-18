@@ -2,59 +2,61 @@ package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.contr
 
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.Game;
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.repository.GameRepository;
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/game")
 public class GameController {
+
     @Autowired
-    GameRepository gameRepository;
+    ServiceLayer serviceLayer;
 
     //Get all game
-    @GetMapping(value = "/game")
+    @GetMapping
     public List<Game> getAllGames() {
-        return gameRepository.findAll();
+        return serviceLayer.findAllGame();
     }
 
     //Get game by id
-    @GetMapping(value = "/game/{id}")
+    @GetMapping(value = "/{id}")
     public Game getGameById(@PathVariable long id) {
-        Optional<Game> game = gameRepository.findById(id);
-
-        if (!game.isPresent()) {
-            return null;
-        }
-
-        return game.get();
+        Game game = serviceLayer.findGame(id);
+        return game;
     }
 
     //Create game
     @PostMapping
-    public Game createGame(@RequestBody Game game) {
-        gameRepository.save(game);
-        return game;
+    @ResponseStatus(HttpStatus.CREATED)
+    public Game createGame(@RequestBody @Valid Game game) {
+        Game returnGame = serviceLayer.saveGame(game);
+        return returnGame;
     }
 
     //Update game
     @PutMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateGame(@RequestBody Game game, @PathVariable long id) {
-        if(game.getGame_id(1L) == null) {
+        if (game.getGame_id() == null) {
             game.setGame_id(id);
         }
 
-        if(game.getGame_id(1L) != id) {
+        if (game.getGame_id() != id) {
             throw new IllegalArgumentException("Game ID must match parameter given");
         }
-        gameRepository.save(game);
+        serviceLayer.updateGame(game);
     }
 
     //Delete game by id
     @DeleteMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteGame(@PathVariable long id) {
-        gameRepository.deleteById(id);
+        serviceLayer.removeGame(id);
     }
 }
