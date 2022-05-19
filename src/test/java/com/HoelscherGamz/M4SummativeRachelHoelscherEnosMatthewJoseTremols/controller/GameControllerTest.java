@@ -75,7 +75,7 @@ public class GameControllerTest {
         //GET all mock
         List<Game> gameList = Arrays.asList(mockOutput, createOutput, createInput);
 
-        doReturn(gameList).when(serviceLayer).findAllGame();
+        doReturn(gameList).when(serviceLayer).findAllGame(null, null, null);
 
 
 
