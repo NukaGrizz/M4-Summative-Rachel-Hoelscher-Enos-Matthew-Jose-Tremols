@@ -77,9 +77,9 @@ public class ServiceLayer {
     }
 
     //Find Console By Manufacturer (called above)
-//    public List<Console> findByManufacturer(String manufacturer) {
-//        return consoleRepository.findByManufacturer(manufacturer);
-//    }
+    //    public List<Console> findByManufacturer(String manufacturer) {
+    //        return consoleRepository.findByManufacturer(manufacturer);
+    //    }
 
     //Update console
     @Transactional
