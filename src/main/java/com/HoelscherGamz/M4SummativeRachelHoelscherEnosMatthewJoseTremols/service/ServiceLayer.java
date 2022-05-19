@@ -70,11 +70,17 @@ public class ServiceLayer {
         List<Console> consoleList = consoleRepository.findAll();
 
         if (manufacturer != null) {
-            return consoleRepository.findByManufacturer(manufacturer);
-        } else {
+            consoleList = consoleRepository.findAll().stream()
+                    .filter(r -> r.getManufacturer().contains(manufacturer))
+                    .collect(Collectors.toList());
+        }
+
+//        if (manufacturer != null) {
+//            return consoleRepository.findByManufacturer(manufacturer);
+//        } else {
             return consoleList;
         }
-    }
+//    }
 
     //Find Console By Manufacturer (called above)
     //    public List<Console> findByManufacturer(String manufacturer) {
@@ -139,6 +145,8 @@ public class ServiceLayer {
     public List<Game> findAllGame() {
 
         List<Game> gameList = gameRepository.findAll();
+
+//        if (studio != null)
 
         return gameList;
     }
