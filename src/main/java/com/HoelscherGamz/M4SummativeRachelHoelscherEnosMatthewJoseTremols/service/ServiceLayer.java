@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 public class ServiceLayer {
@@ -24,7 +25,7 @@ public class ServiceLayer {
     private TShirtRepository tShirtRepository;
 
     @Autowired
-    public ServiceLayer(ConsoleRepository consoleRepository, GameRepository gameRepository, InvoiceRepository invoiceRepository, ProcessingFeeRepository processingFeeRepository, SalesTaxRepository salesTaxRepository, TShirtRepository tShirtRepository){
+    public ServiceLayer(ConsoleRepository consoleRepository, GameRepository gameRepository, InvoiceRepository invoiceRepository, ProcessingFeeRepository processingFeeRepository, SalesTaxRepository salesTaxRepository, TShirtRepository tShirtRepository) {
         this.consoleRepository = consoleRepository;
         this.gameRepository = gameRepository;
         this.tShirtRepository = tShirtRepository;
@@ -51,7 +52,7 @@ public class ServiceLayer {
         c.setQuantity(console.getQuantity());
         consoleRepository.save(c);
         console.setConsole_id(c.getConsole_id());
-        return  console;
+        return console;
     }
 
     //Find Console By Id
@@ -64,17 +65,21 @@ public class ServiceLayer {
     }
 
     // find All consoles
-    public List<Console> findAllConsole() {
+    public List<Console> findAllConsole(String manufacturer) {
 
         List<Console> consoleList = consoleRepository.findAll();
 
-        return consoleList;
+        if (manufacturer != null) {
+            return consoleRepository.findByManufacturer(manufacturer);
+        } else {
+            return consoleList;
+        }
     }
 
-    //Find Console By Manufacturer
-    public List<Console> findByManufacturer(String manufacturer){
-        return consoleRepository.findByManufacturer(manufacturer);
-    }
+    //Find Console By Manufacturer (called above)
+    //    public List<Console> findByManufacturer(String manufacturer) {
+    //        return consoleRepository.findByManufacturer(manufacturer);
+    //    }
 
     //Update console
     @Transactional
@@ -159,20 +164,19 @@ public class ServiceLayer {
     }
 
     //Search for games by studio
-    public List<Game> findByStudio(String studio){
+    public List<Game> findByStudio(String studio) {
         return gameRepository.findAllGamesByStudio(studio);
     }
 
     //Search for games by ESBR_Rating
-    public List<Game> findByRating(String rating){
+    public List<Game> findByRating(String rating) {
         return gameRepository.findAllGamesByEsrbRating(rating);
     }
 
     //Search for games by Title
-    public List<Game> findByTitle(String title){
+    public List<Game> findByTitle(String title) {
         return gameRepository.findAllGamesByTitle(title);
     }
-
 
 
     //
@@ -231,12 +235,12 @@ public class ServiceLayer {
     }
 
     //Search for T-shirts by color.
-    public List<TShirt> findByColor(String color){
+    public List<TShirt> findByColor(String color) {
         return tShirtRepository.findByColor(color);
     }
 
     //Search for T-shirts by size.
-    public List<TShirt> findBySize(String size){
+    public List<TShirt> findBySize(String size) {
         return tShirtRepository.findBySize(size);
     }
 
@@ -247,7 +251,7 @@ public class ServiceLayer {
 
     //Create New Invoice
     @Transactional
-    public Invoice saveInvoice(Invoice invoice) throws Exception{
+    public Invoice saveInvoice(Invoice invoice) throws Exception {
 
         // Persist invoice - the following 8 fields are required to create invoice!!
         Invoice i = new Invoice();
@@ -260,18 +264,18 @@ public class ServiceLayer {
         i.setItemId(invoice.getItemId());
         i.setQuantity(invoice.getQuantity());
 
-        if(invoice.getQuantity() == 0) {
+        if (invoice.getQuantity() == 0) {
             throw new IllegalArgumentException("Invoice Quantity cannot equal 0");
         }
 
-        if(invoice.getState().equals(findSalesTax(invoice.getState()).getState())){
+        if (invoice.getState().equals(findSalesTax(invoice.getState()).getState())) {
             throw new IllegalArgumentException("Invoice State not valid - State value must equal value of a SalesTax state. To see SaleTax states query SaleTax Endpoint to get all entries");
         }
 
         //ensure enough left for order subtract from model quantity remaining and set price
         if (invoice.getItemType().equals("game")) {
 
-            if(invoice.getQuantity() <= findGame(invoice.getItemId()).getQuantity()){
+            if (invoice.getQuantity() <= findGame(invoice.getItemId()).getQuantity()) {
                 Game game = findGame(invoice.getItemId());
                 //reduce supply of game item in stock
                 game.setQuantity(game.getQuantity() - invoice.getQuantity());
@@ -279,10 +283,10 @@ public class ServiceLayer {
                 i.setUnit_price(game.getPrice());
             } else {
                 //throw Error item supply not sufficient
-                throw new NoTransactionException("There are not enough of the requested Games left in stock to fulfill your order. Currently there are " + findGame(invoice.getItemId()).getQuantity() + " remaining!" );
+                throw new NoTransactionException("There are not enough of the requested Games left in stock to fulfill your order. Currently there are " + findGame(invoice.getItemId()).getQuantity() + " remaining!");
             }
-        }  else if(invoice.getItemType().equals("console")) {
-            if(invoice.getQuantity() <= findConsole(invoice.getItemId()).getQuantity()){
+        } else if (invoice.getItemType().equals("console")) {
+            if (invoice.getQuantity() <= findConsole(invoice.getItemId()).getQuantity()) {
                 Console console = findConsole(invoice.getItemId());
                 //reduce supply of game item in stock
                 console.setQuantity(console.getQuantity() - invoice.getQuantity());
@@ -290,11 +294,11 @@ public class ServiceLayer {
                 i.setUnit_price(console.getPrice());
             } else {
                 //throw Error item supply not sufficient
-                throw new NoTransactionException("There are not enough of the requested Consoles left in stock to fulfill your order. Currently there are " + findConsole(invoice.getItemId()).getQuantity() + " remaining!" );
+                throw new NoTransactionException("There are not enough of the requested Consoles left in stock to fulfill your order. Currently there are " + findConsole(invoice.getItemId()).getQuantity() + " remaining!");
             }
 
-        } else if(invoice.getItemType().equals("tshirt") || invoice.getItemType().equals("tShirt")) {
-            if(invoice.getQuantity() <= findTShirt(invoice.getItemId()).getQuantity()){
+        } else if (invoice.getItemType().equals("tshirt") || invoice.getItemType().equals("tShirt")) {
+            if (invoice.getQuantity() <= findTShirt(invoice.getItemId()).getQuantity()) {
                 TShirt tShirt = findTShirt(invoice.getItemId());
                 //reduce supply of game item in stock
                 tShirt.setQuantity(tShirt.getQuantity() - invoice.getQuantity());
@@ -302,12 +306,13 @@ public class ServiceLayer {
                 i.setUnit_price(tShirt.getPrice());
             } else {
                 //throw Error item supply not sufficient
-                throw new NoTransactionException("There are not enough of the requested TShirts left in stock to fulfill your order. Currently there are " + findTShirt(invoice.getItemId()).getQuantity() + " remaining!" );
+                throw new NoTransactionException("There are not enough of the requested TShirts left in stock to fulfill your order. Currently there are " + findTShirt(invoice.getItemId()).getQuantity() + " remaining!");
             }
         } else {
             //throw errpr no product type found acceptable types include game console tshirt
             throw new IllegalArgumentException("no matching product type found acceptable types include 'game' 'console' 'tshirt' ");
-        };
+        }
+        ;
 
         //calculate subtotal
         i.setSubtotal(invoice.getUnit_price().multiply(BigDecimal.valueOf(invoice.getQuantity())));
@@ -318,7 +323,7 @@ public class ServiceLayer {
         invoice.setTax(i.getTax());
 
         //get processingfee from findProcessingFee(itemType)
-        if (invoice.getQuantity()>10){
+        if (invoice.getQuantity() > 10) {
             i.setProcessing_fee(findProcessingFee(invoice.getItemType()).getFee().add(BigDecimal.valueOf(15.49)));
         } else {
             i.setProcessing_fee(findProcessingFee(invoice.getItemType()).getFee());
