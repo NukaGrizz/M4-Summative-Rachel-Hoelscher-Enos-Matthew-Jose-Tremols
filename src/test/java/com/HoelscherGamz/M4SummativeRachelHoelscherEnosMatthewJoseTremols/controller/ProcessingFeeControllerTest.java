@@ -1,7 +1,6 @@
 package com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.controller;
 
-
-import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.SalesTax;
+import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.ProcessingFee;
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.service.ServiceLayer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -18,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
+
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -25,10 +25,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @RunWith(SpringRunner.class)
-@WebMvcTest(SalesTaxController.class)
-public class SalesTaxControllerTest {
+@WebMvcTest(ProcessingFeeController.class)
+public class ProcessingFeeControllerTest {
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -41,46 +41,46 @@ public class SalesTaxControllerTest {
     public void setUp() {
 
         //GET by id mock
-        SalesTax mockOutput = new SalesTax();
-        mockOutput.setState("FL");
-        mockOutput.setRate(BigDecimal.valueOf(0.06));
+        ProcessingFee mockOutput = new ProcessingFee();
+        mockOutput.setProduct_type("game");
+        mockOutput.setFee(BigDecimal.valueOf(15.00));
 
-        doReturn(mockOutput).when(serviceLayer).findSalesTax("FL");
+        doReturn(mockOutput).when(serviceLayer).findProcessingFee("game");
 
         //POST mock
-        SalesTax createInput = new SalesTax();
-        createInput.setState("FL");
-        createInput.setRate(BigDecimal.valueOf(0.06));
+        ProcessingFee createInput = new ProcessingFee();
+        createInput.setProduct_type("game");
+        createInput.setFee(BigDecimal.valueOf(15.00));
 
-        doReturn(mockOutput).when(serviceLayer).saveSalesTax(createInput);
+        doReturn(mockOutput).when(serviceLayer).saveProcessingFee(createInput);
 
         //GET all mock
-        List<SalesTax> salesTaxesList = Arrays.asList(mockOutput);
+        List<ProcessingFee> processingFeeList = Arrays.asList(mockOutput);
 
-        doReturn(salesTaxesList).when(serviceLayer).findAllSalesTax();
+        doReturn(processingFeeList).when(serviceLayer).findAllProcessingFee();
 
     }
 
     @Test
-    public void getAllSalesTax() throws Exception {
+    public void getAllProcessingFee() throws Exception {
 
-        mockMvc.perform(get("/salestax"))
+        mockMvc.perform(get("/processingfee"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0]").isNotEmpty());
     }
 
     @Test
-    public void getSalesTaxById() throws Exception{
+    public void getProcessingFeeById() throws Exception {
 
-        SalesTax mockOutput = new SalesTax();
-        mockOutput.setState("FL");
-        mockOutput.setRate(BigDecimal.valueOf(0.06));
+        ProcessingFee mockOutput = new ProcessingFee();
+        mockOutput.setProduct_type("game");
+        mockOutput.setFee(BigDecimal.valueOf(15.00));
 
 
         String mockJson = mapper.writeValueAsString(mockOutput);
 
-        mockMvc.perform(get("/salestax/FL")
+        mockMvc.perform(get("/processingfee/game")
                 )
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -88,21 +88,21 @@ public class SalesTaxControllerTest {
     }
 
     @Test
-    public void createSalesTax() throws Exception {
+    public void createProcessingFee() throws Exception {
 
-        SalesTax createInput = new SalesTax();
-        createInput.setState("FL");
-        createInput.setRate(new BigDecimal("0.06"));
+        ProcessingFee createInput = new ProcessingFee();
+        createInput.setProduct_type("game");
+        createInput.setFee(BigDecimal.valueOf(15.00));
 
         String mockInputJson = mapper.writeValueAsString(createInput);
 
-        SalesTax createOutput = new SalesTax();
-        createOutput.setState("FL");
-        createOutput.setRate(new BigDecimal("0.06"));
+        ProcessingFee createOutput = new ProcessingFee();
+        createOutput.setProduct_type("game");
+        createOutput.setFee(new BigDecimal("15.00"));
 
         String mockOutputJson = mapper.writeValueAsString(createOutput);
 
-        mockMvc.perform(post("/salestax")
+        mockMvc.perform(post("/processingfee")
                         .content(mockInputJson)
                         .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -113,15 +113,15 @@ public class SalesTaxControllerTest {
     }
 
     @Test
-    public void updateSalesTax() throws Exception {
-        SalesTax updateInput = new SalesTax();
-        updateInput.setState("FL");
-        updateInput.setRate(BigDecimal.valueOf(0.07));
+    public void updateProcessingFee() throws Exception {
+        ProcessingFee updateInput = new ProcessingFee();
+        updateInput.setProduct_type("game");
+        updateInput.setFee(BigDecimal.valueOf(10.00));
 
         String mockUpdateJson = mapper.writeValueAsString(updateInput);
 
         mockMvc.perform(
-                        put("/salestax/FL")
+                        put("/processingfee/game")
                                 .content(mockUpdateJson)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
@@ -130,9 +130,9 @@ public class SalesTaxControllerTest {
     }
 
     @Test
-    public void deleteSalesTax()  throws Exception {
+    public void deleteSalesTax() throws Exception {
 
-        mockMvc.perform(delete("/salestax/FL"))
+        mockMvc.perform(delete("/processingfee/game"))
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
