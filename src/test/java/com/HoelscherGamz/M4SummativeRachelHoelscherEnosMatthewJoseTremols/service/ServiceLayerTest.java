@@ -418,7 +418,7 @@ public class ServiceLayerTest {
         game1.setQuantity(150);
 
         Game game2 = new Game();
-        game2.setGame_id(1L);
+        game2.setGame_id(2L);
         game2.setTitle("Resident Evil Village");
         game2.setEsrbRating("M17+");
         game2.setDescription("Players control Ethan Winters, who searches for his kidnapped daughter in a village filled with mutant creatures. ");
