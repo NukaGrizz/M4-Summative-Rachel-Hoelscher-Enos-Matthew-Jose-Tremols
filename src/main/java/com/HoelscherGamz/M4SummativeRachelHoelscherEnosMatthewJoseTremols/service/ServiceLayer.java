@@ -232,9 +232,23 @@ public class ServiceLayer {
         }
 
         //Get all TShirts
-        public List<TShirt> findAllTShirt () {
+        public List<TShirt> findAllTShirt (String color, String size) {
 
             List<TShirt> tShirtList = tShirtRepository.findAll();
+
+            if (color != null) {
+                tShirtList = tShirtList.stream()
+                        .filter(r -> r.getColor().contains(color))
+                        .collect(Collectors.toList());
+            }
+
+            if (size != null) {
+                tShirtList = tShirtList.stream()
+                        .filter(r -> r.getSize().contains(size))
+                        .collect(Collectors.toList());
+            }
+
+
 
             return tShirtList;
         }
