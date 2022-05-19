@@ -21,8 +21,8 @@ public class TShirtController {
 
     //Get all tShirt
     @GetMapping
-    public List<TShirt> getAllTShirt() {
-        return serviceLayer.findAllTShirt();
+    public List<TShirt> getAllTShirt(@RequestParam(required = false) String color, @RequestParam(required = false) String size) {
+        return serviceLayer.findAllTShirt(color, size);
     }
 
     //Get tShirt by id
