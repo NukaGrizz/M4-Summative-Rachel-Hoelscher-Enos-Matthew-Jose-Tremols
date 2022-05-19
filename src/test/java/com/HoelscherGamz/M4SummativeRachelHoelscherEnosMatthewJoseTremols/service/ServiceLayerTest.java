@@ -198,18 +198,34 @@ public class ServiceLayerTest {
         invoice3.setZipcode("92129");
         invoice3.setItemType("game");
         invoice3.setItemId(1L);
-        invoice3.setUnit_price(BigDecimal.valueOf(35.99));
+        invoice3.setUnit_price(BigDecimal.valueOf(40.99));
         invoice3.setQuantity(1);
-        invoice3.setSubtotal(BigDecimal.valueOf(35.99));
-        invoice3.setTax(BigDecimal.valueOf(1.06));
-        invoice3.setProcessing_fee(BigDecimal.valueOf(1.98));
-        invoice3.setTotal(BigDecimal.valueOf(40.12));
+        invoice3.setSubtotal(BigDecimal.valueOf(40.99));
+        invoice3.setTax(BigDecimal.valueOf(2.46));
+        invoice3.setProcessing_fee(BigDecimal.valueOf(1.49));
+        invoice3.setTotal(BigDecimal.valueOf(44.94));
+
+        Invoice invoice4 = new Invoice();
+        invoice4.setInvoice_id((1L));
+        invoice4.setName("Mary");
+        invoice4.setStreet("123 Oak Avenue");
+        invoice4.setCity("San Diego");
+        invoice4.setState("CA");
+        invoice4.setZipcode("92129");
+        invoice4.setItemType("game");
+        invoice4.setItemId(1L);
+        invoice4.setUnit_price(BigDecimal.valueOf(40.99));
+        invoice4.setQuantity(1);
+        invoice4.setSubtotal(BigDecimal.valueOf(40.99));
+        invoice4.setTax(BigDecimal.valueOf(2.46));
+        invoice4.setProcessing_fee(BigDecimal.valueOf(1.49));
+        invoice4.setTotal(BigDecimal.valueOf(44.94));
 
         List iList2 = new ArrayList<>();
         iList2.add(invoice1);
         iList2.add(invoice2);
 
-        doReturn(invoice1).when(invoiceRepository).save(invoice3);
+        doReturn(invoice4).when(invoiceRepository).save(invoice3);
         doReturn(Optional.of(invoice1)).when(invoiceRepository).findById(1L);
         doReturn(iList2).when(invoiceRepository).findAll();
     }
@@ -418,7 +434,7 @@ public class ServiceLayerTest {
         game1.setQuantity(150);
 
         Game game2 = new Game();
-        game2.setGame_id(1L);
+        game2.setGame_id(2L);
         game2.setTitle("Resident Evil Village");
         game2.setEsrbRating("M17+");
         game2.setDescription("Players control Ethan Winters, who searches for his kidnapped daughter in a village filled with mutant creatures. ");
@@ -694,9 +710,9 @@ public class ServiceLayerTest {
         expectedInvoice.setUnit_price(BigDecimal.valueOf(40.99));
         expectedInvoice.setQuantity(1);
         expectedInvoice.setSubtotal(BigDecimal.valueOf(40.99));
-        expectedInvoice.setTax(BigDecimal.valueOf(2.45));
+        expectedInvoice.setTax(BigDecimal.valueOf(2.46));
         expectedInvoice.setProcessing_fee(BigDecimal.valueOf(1.49));
-        expectedInvoice.setTotal(BigDecimal.valueOf(44.93));
+        expectedInvoice.setTotal(BigDecimal.valueOf(44.94));
 
         Invoice actualResult = service.saveInvoice(invoiceToSave);
 

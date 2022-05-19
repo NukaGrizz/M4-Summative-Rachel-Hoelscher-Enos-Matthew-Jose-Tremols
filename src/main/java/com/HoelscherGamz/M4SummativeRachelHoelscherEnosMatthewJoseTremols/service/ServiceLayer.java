@@ -9,6 +9,8 @@ import org.springframework.transaction.NoTransactionException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -291,7 +293,7 @@ public class ServiceLayer {
         @Transactional
         public Invoice saveInvoice (Invoice invoice) throws Exception {
 
-            // Persist invoice - the following 8 fields are required to create invoice!!
+             //Persist invoice - the following 8 fields are required to create invoice!!
             Invoice i = new Invoice();
             i.setName(invoice.getName());
             i.setStreet(invoice.getStreet());
@@ -306,7 +308,7 @@ public class ServiceLayer {
                 throw new IllegalArgumentException("Invoice Quantity cannot equal 0");
             }
 
-            if (invoice.getState().equals(findSalesTax(invoice.getState()).getState())) {
+            if (!invoice.getState().equals(findSalesTax(invoice.getState()).getState())) {
                 throw new IllegalArgumentException("Invoice State not valid - State value must equal value of a SalesTax state. To see SaleTax states query SaleTax Endpoint to get all entries");
             }
 
@@ -319,6 +321,7 @@ public class ServiceLayer {
                     game.setQuantity(game.getQuantity() - invoice.getQuantity());
                     //set price
                     i.setUnit_price(game.getPrice());
+                    invoice.setUnit_price(i.getUnit_price());
                 } else {
                     //throw Error item supply not sufficient
                     throw new NoTransactionException("There are not enough of the requested Games left in stock to fulfill your order. Currently there are " + findGame(invoice.getItemId()).getQuantity() + " remaining!");
@@ -330,6 +333,7 @@ public class ServiceLayer {
                     console.setQuantity(console.getQuantity() - invoice.getQuantity());
                     //set price
                     i.setUnit_price(console.getPrice());
+                    invoice.setUnit_price(i.getUnit_price());
                 } else {
                     //throw Error item supply not sufficient
                     throw new NoTransactionException("There are not enough of the requested Consoles left in stock to fulfill your order. Currently there are " + findConsole(invoice.getItemId()).getQuantity() + " remaining!");
@@ -342,6 +346,7 @@ public class ServiceLayer {
                     tShirt.setQuantity(tShirt.getQuantity() - invoice.getQuantity());
                     //set price
                     i.setUnit_price(tShirt.getPrice());
+                    invoice.setUnit_price(i.getUnit_price());
                 } else {
                     //throw Error item supply not sufficient
                     throw new NoTransactionException("There are not enough of the requested TShirts left in stock to fulfill your order. Currently there are " + findTShirt(invoice.getItemId()).getQuantity() + " remaining!");
@@ -350,7 +355,6 @@ public class ServiceLayer {
                 //throw errpr no product type found acceptable types include game console tshirt
                 throw new IllegalArgumentException("no matching product type found acceptable types include 'game' 'console' 'tshirt' ");
             }
-            ;
 
             //calculate subtotal
             i.setSubtotal(invoice.getUnit_price().multiply(BigDecimal.valueOf(invoice.getQuantity())));
@@ -358,6 +362,7 @@ public class ServiceLayer {
 
             //calculate Tax
             i.setTax(findSalesTax(invoice.getState()).getRate().multiply(invoice.getSubtotal()));
+            i.setTax(i.getTax().setScale(2, RoundingMode.HALF_UP));
             invoice.setTax(i.getTax());
 
             //get processingfee from findProcessingFee(itemType)
