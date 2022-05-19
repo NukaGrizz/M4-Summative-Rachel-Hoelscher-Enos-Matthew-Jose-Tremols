@@ -78,7 +78,7 @@ public class TShirtControllerTest {
     }
 
     @Test
-    public void getAllTShirt() throws Exception{
+    public void shouldReturnAllTShirtsInStock() throws Exception{
 
         mockMvc.perform(get("/tShirt"))
                 .andDo(print())
@@ -87,7 +87,7 @@ public class TShirtControllerTest {
     }
 
     @Test
-    public void getTShirtById() throws Exception{
+    public void shouldReturnTShirtWhenSearchingById() throws Exception{
 
         TShirt mockInput = new TShirt();
         mockInput.setT_shirt_id(2L);
@@ -106,7 +106,7 @@ public class TShirtControllerTest {
     }
 
     @Test
-    public void createTShirt() throws Exception{
+    public void shouldCreateNewTShirt() throws Exception{
 
         TShirt createInput = new TShirt();
 //        createInput.setT_shirt_id(2L);
@@ -138,7 +138,7 @@ public class TShirtControllerTest {
     }
 
     @Test
-    public void updateTShirt() throws Exception{
+    public void shouldUpdateAnExistingTShirtsInfo() throws Exception{
 
         TShirt updateOutput = new TShirt();
         updateOutput.setT_shirt_id(4L);
@@ -160,7 +160,7 @@ public class TShirtControllerTest {
     }
 
     @Test
-    public void deleteTShirt() throws Exception{
+    public void shouldDeleteASingleTShirtById() throws Exception{
 
         mockMvc.perform(delete("/tShirt/8"))
                 .andDo(print())
