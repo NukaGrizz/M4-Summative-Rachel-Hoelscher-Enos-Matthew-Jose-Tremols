@@ -20,8 +20,8 @@ public class GameController {
 
     //Get all game
     @GetMapping
-    public List<Game> getAllGames() {
-        return serviceLayer.findAllGame();
+    public List<Game> getAllGames(@RequestParam(required = false) String studio,@RequestParam(required = false) String esrbRating, @RequestParam(required = false) String title) {
+        return serviceLayer.findAllGame(studio, esrbRating, title);
     }
 
     //Get game by id

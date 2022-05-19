@@ -75,7 +75,7 @@ public class GameControllerTest {
         //GET all mock
         List<Game> gameList = Arrays.asList(mockOutput, createOutput, createInput);
 
-        doReturn(gameList).when(serviceLayer).findAllGame();
+        doReturn(gameList).when(serviceLayer).findAllGame(null, null, null);
 
 
 
@@ -84,7 +84,7 @@ public class GameControllerTest {
 
 
     @Test
-    public void getAllGames() throws Exception {
+    public void shouldReturnAllGamesInStock() throws Exception {
 
         mockMvc.perform(get("/game"))
                 .andDo(print())
@@ -93,7 +93,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void getGameById() throws Exception{
+    public void shouldReturnAGameWhenSearchingById() throws Exception{
 
         Game mockOutput = new Game();
         mockOutput.setGame_id(3L);
@@ -114,7 +114,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void createGame() throws Exception {
+    public void shouldCreateNewGame() throws Exception {
 
         Game createInput = new Game();
 //        createInput.setGame_id(3L);
@@ -149,7 +149,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void updateGame() throws Exception {
+    public void shouldUpdateAnExistingGamesInfo() throws Exception {
         Game updateOutput = new Game();
         updateOutput.setGame_id(8L);
         updateOutput.setTitle("Stardew Valley");
@@ -171,7 +171,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void deleteGame()  throws Exception {
+    public void shouldDeleteASingleGameById()  throws Exception {
 
         mockMvc.perform(delete("/game/8"))
                 .andDo(print())
