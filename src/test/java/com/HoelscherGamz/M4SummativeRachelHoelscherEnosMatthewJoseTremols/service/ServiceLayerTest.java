@@ -245,32 +245,36 @@ public class ServiceLayerTest {
 
     @Test
     public void shouldFindAllConsoles() {
-
-        Console console1 = new Console();
-        console1.setConsole_id(1L);
-        console1.setModel("PS5");
-        console1.setManufacturer("Sony");
-        console1.setMemory_amount("825 GB");
-        console1.setProcessor("AMD Zen 2 CPU");
-        console1.setPrice(BigDecimal.valueOf(499.99));
-        console1.setQuantity(100);
-
-        Console console2 = new Console();
-        console2.setConsole_id(2L);
-        console2.setModel("XBox Series X");
-        console2.setManufacturer("Microsoft");
-        console2.setMemory_amount("1TB");
-        console2.setProcessor("AMD Zen 2 CPU");
-        console2.setPrice(BigDecimal.valueOf(550.99));
-        console2.setQuantity(200);
+//
+//        Console console1 = new Console();
+//        console1.setConsole_id(1L);
+//        console1.setModel("PS5");
+//        console1.setManufacturer("Sony");
+//        console1.setMemory_amount("825 GB");
+//        console1.setProcessor("AMD Zen 2 CPU");
+//        console1.setPrice(BigDecimal.valueOf(499.99));
+//        console1.setQuantity(100);
+//
+//        Console console2 = new Console();
+//        console2.setConsole_id(2L);
+//        console2.setModel("XBox Series X");
+//        console2.setManufacturer("Microsoft");
+//        console2.setMemory_amount("1TB");
+//        console2.setProcessor("AMD Zen 2 CPU");
+//        console2.setPrice(BigDecimal.valueOf(550.99));
+//        console2.setQuantity(200);
+//
+//        List<Console> fromService = service.findAllConsole();
+//
+//        assertEquals(2, fromService.size());
 
         List<Console> fromService = service.findAllConsole();
 
-        assertEquals(2, fromService.size());
+        assertEquals(1, fromService.size());
     }
 
     @Test
-    public void findByManufacturer() {
+    public void shouldFindByManufacturer() {
         List<Console> fromService = service.findAllConsole("Sony");
 
         assertEquals(1, fromService.size());
@@ -311,7 +315,21 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void removeConsole() {
+    public void shouldRemoveConsole() {
+        // set up a console in the list, then delete it -- then check if there are 0 items in list
+        Console console = new Console();
+        console.setConsole_id(1L);
+        console.setModel("PS5");
+        console.setManufacturer("Sony");
+        console.setMemory_amount("825 GB");
+        console.setProcessor("AMD Zen 2 CPU");
+        console.setPrice(BigDecimal.valueOf(499.99));
+        console.setQuantity(100);
+
+        //Need to be in a list?
+        Console actualResult = service.removeConsole(1L);
+
+        assertEquals(0, actualResult.size());
     }
 
     @Test
@@ -395,19 +413,40 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void removeGame() {
+    public void shouldRemoveGame() {
+        Game game = new Game();
+        game.setGame_id(1L);
+        game.setTitle("Breath of the Wild");
+        game.setEsrbRating("E10+");
+        game.setDescription("The player controls an amnesiac Link, who awakens from a hundred-year slumber, and attempts to regain his memories and prevent the destruction of Hyrule by Calamity Ganon.");
+        game.setStudio("Nintendo");
+        game.setPrice(BigDecimal.valueOf(40.99));
+        game.setQuantity(150);
+
+        Game actualResult = service.removeGame(1L);
+
+        assertEquals(0, actualResult.size());
     }
 
     @Test
-    public void findByStudio() {
+    public void shouldFindByStudio() {
+        List<Game> fromService = service.findByStudio("Capcom");
+
+        assertEquals(1, fromService.size());
     }
 
     @Test
-    public void findByRating() {
+    public void shouldFindByRating() {
+        List<Game> fromService = service.findByRating("E10+");
+
+        assertEquals(1, fromService.size());
     }
 
     @Test
-    public void findByTitle() {
+    public void shouldFindByTitle() {
+        List<Game> fromService = service.findByTitle("Breath of the Wild");
+
+        assertEquals(1, fromService.size());
     }
 
     @Test
@@ -485,50 +524,68 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void removeTShirt() {
+    public void shouldRemoveTShirt() {
+        TShirt tShirt = new TShirt();
+        tShirt.setT_shirt_id(1L);
+        tShirt.setSize("Large");
+        tShirt.setColor("Blue");
+        tShirt.setDescription("Men's 100% Smash Bros Shirt");
+        tShirt.setPrice(BigDecimal.valueOf(29.99));
+        tShirt.setQuantity(1000);
+
+        //Need to be in a list?
+        TShirt actualResult = service.removeTShirt(1L);
+
+        assertEquals(0, actualResult.size());
     }
 
     @Test
-    public void findByColor() {
+    public void shouldFindByColor() {
+        List<TShirt> fromService = service.findByColor("Blue");
+
+        assertEquals(1, fromService.size());
     }
 
     @Test
-    public void findBySize() {
+    public void shouldFindBySize() {
+        List<TShirt> fromService = service.findBySize("Medium");
+
+        assertEquals(1, fromService.size());
     }
 
-    @Test
-    public void shouldSaveInvoice() {
-        Invoice invoiceToSave = new Invoice();
-        invoiceToSave.setInvoice_id((155L));
-        invoiceToSave.setName("Mary");
-        invoiceToSave.setStreet("123 Oak Avenue");
-        invoiceToSave.setCity("San Diego");
-        invoiceToSave.setState("CA");
-        invoiceToSave.setZipcode("92129");
-        invoiceToSave.setItemType("game");
-        invoiceToSave.setItemId(1L);
-        invoiceToSave.setQuantity(1);
-
-        Invoice expectedInvoice = new Invoice();
-        expectedInvoice.setName("Mary");
-        expectedInvoice.setStreet("123 Oak Avenue");
-        expectedInvoice.setCity("San Diego");
-        expectedInvoice.setState("CA");
-        expectedInvoice.setZipcode("92129");
-        expectedInvoice.setItemType("game");
-        expectedInvoice.setItemId(1L);
-        expectedInvoice.setUnit_price(BigDecimal.valueOf(35.99));
-        expectedInvoice.setQuantity(1);
-        expectedInvoice.setSubtotal(BigDecimal.valueOf(35.99));
-        expectedInvoice.setTax(BigDecimal.valueOf(1.06));
-        expectedInvoice.setProcessing_fee(BigDecimal.valueOf(1.98));
-        expectedInvoice.setTotal(BigDecimal.valueOf(40.12));
-        expectedInvoice.setInvoice_id((1L));
-
-        Invoice actualResult = service.saveInvoice(Invoice, invoiceToSave);
-
-        assertEquals(expectedInvoice, actualResult);
-    }
+//    @Test
+//    public void shouldSaveInvoice() {
+//        Invoice invoiceToSave = new Invoice();
+//        invoiceToSave.setInvoice_id((155L));
+//        invoiceToSave.setName("Mary");
+//        invoiceToSave.setStreet("123 Oak Avenue");
+//        invoiceToSave.setCity("San Diego");
+//        invoiceToSave.setState("CA");
+//        invoiceToSave.setZipcode("92129");
+//        invoiceToSave.setItemType("game");
+//        invoiceToSave.setItemId(1L);
+//        invoiceToSave.setQuantity(1);
+//
+//        Invoice expectedInvoice = new Invoice();
+//        expectedInvoice.setInvoice_id((1L));
+//        expectedInvoice.setName("Mary");
+//        expectedInvoice.setStreet("123 Oak Avenue");
+//        expectedInvoice.setCity("San Diego");
+//        expectedInvoice.setState("CA");
+//        expectedInvoice.setZipcode("92129");
+//        expectedInvoice.setItemType("game");
+//        expectedInvoice.setItemId(1L);
+//        expectedInvoice.setUnit_price(BigDecimal.valueOf(35.99));
+//        expectedInvoice.setQuantity(1);
+//        expectedInvoice.setSubtotal(BigDecimal.valueOf(35.99));
+//        expectedInvoice.setTax(BigDecimal.valueOf(1.06));
+//        expectedInvoice.setProcessing_fee(BigDecimal.valueOf(1.98));
+//        expectedInvoice.setTotal(BigDecimal.valueOf(40.12));
+//;
+//        Invoice actualResult = service.saveInvoice(invoiceToSave);
+//
+//        assertEquals(expectedInvoice, actualResult);
+//    }
 
     @Test
     public void shouldFindInvoice() {
@@ -553,15 +610,88 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void findAllInvoice() {
+    public void shouldFindAllInvoices() {
+        List<Invoice> fromService = service.findAllInvoice();
+
+        assertEquals(1, fromService.size());
     }
 
     @Test
-    public void updateInvoice() {
+    public void shouldUpdateInvoice() {
+        Invoice invoice = new Invoice();
+        invoice.setInvoice_id((1L));
+        invoice.setName("Mary");
+        invoice.setStreet("123 Oak Avenue");
+        invoice.setCity("San Diego");
+        invoice.setState("CA");
+        invoice.setZipcode("92129");
+        invoice.setItemType("game");
+        invoice.setItemId(1L);
+        invoice.setUnit_price(BigDecimal.valueOf(35.99));
+        invoice.setQuantity(1);
+        invoice.setSubtotal(BigDecimal.valueOf(35.99));
+        invoice.setTax(BigDecimal.valueOf(1.06));
+        invoice.setProcessing_fee(BigDecimal.valueOf(1.98));
+        invoice.setTotal(BigDecimal.valueOf(40.12));
+        invoiceRepository.save(invoice);
+
+        invoice.setName("John");
+        invoice.setStreet("321 Main Street");
+        invoice.setCity("Honolulu");
+        invoice.setState("Hawaii");
+        invoice.setZipcode("96795");
+        invoice.setItemType("console");
+        invoice.setItemId(2L);
+        invoice.setUnit_price(BigDecimal.valueOf(550.99));
+        invoice.setQuantity(1);
+        invoice.setSubtotal(BigDecimal.valueOf(550.99));
+        invoice.setTax(BigDecimal.valueOf(1.05));
+        invoice.setProcessing_fee(BigDecimal.valueOf(14.99));
+        invoice.setTotal(BigDecimal.valueOf(593.52));
+        invoiceRepository.save(invoice);
+
+        Invoice expectedInvoice = new Invoice();
+        expectedInvoice.setInvoice_id((1L));
+        expectedInvoice.setName("John");
+        expectedInvoice.setStreet("321 Main Street");
+        expectedInvoice.setCity("Honolulu");
+        expectedInvoice.setState("Hawaii");
+        expectedInvoice.setZipcode("96795");
+        expectedInvoice.setItemType("console");
+        expectedInvoice.setItemId(2L);
+        expectedInvoice.setUnit_price(BigDecimal.valueOf(550.99));
+        expectedInvoice.setQuantity(1);
+        expectedInvoice.setSubtotal(BigDecimal.valueOf(550.99));
+        expectedInvoice.setTax(BigDecimal.valueOf(1.05));
+        expectedInvoice.setProcessing_fee(BigDecimal.valueOf(14.99));
+        expectedInvoice.setTotal(BigDecimal.valueOf(593.52));
+
+        Invoice actualResult = service.saveInvoice(Invoice, invoice);
+
+        assertEquals(expectedInvoice, actualResult);
     }
 
     @Test
-    public void removeInvoice() {
+    public void shouldRemoveInvoice() {
+        Invoice invoice = new Invoice();
+        invoice.setInvoice_id((1L));
+        invoice.setName("Mary");
+        invoice.setStreet("123 Oak Avenue");
+        invoice.setCity("San Diego");
+        invoice.setState("CA");
+        invoice.setZipcode("92129");
+        invoice.setItemType("game");
+        invoice.setItemId(1L);
+        invoice.setUnit_price(BigDecimal.valueOf(35.99));
+        invoice.setQuantity(1);
+        invoice.setSubtotal(BigDecimal.valueOf(35.99));
+        invoice.setTax(BigDecimal.valueOf(1.06));
+        invoice.setProcessing_fee(BigDecimal.valueOf(1.98));
+        invoice.setTotal(BigDecimal.valueOf(40.12));
+
+        Invoice actualResult = service.removeInvoice(1L);
+
+        assertEquals(0, actualResult.size());
     }
 
     @Test
@@ -624,7 +754,14 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void removeProcessingFee() {
+    public void shouldRemoveProcessingFee() {
+        ProcessingFee processingFee = new ProcessingFee();
+        processingFee.setProduct_type("game");
+        processingFee.setFee(BigDecimal.valueOf(1.49));
+
+        ProcessingFee actualResult = service.removeProcessingFee("game");
+
+        assertEquals(0, actualResult.size());
     }
 
     @Test
@@ -679,15 +816,14 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void removeSalesTax() {
-//        SalesTax salesTax1 = new SalesTax();
-//        salesTax1.setState("CA");
-//        salesTax1.setRate(BigDecimal.valueOf(.06));
-//
-//        SalesTax salesTax2 = new SalesTax();
-//        salesTax2.setState("HI");
-//        salesTax2.setRate(BigDecimal.valueOf(.05));
-//
-//
+    public void shouldRemoveSalesTax() {
+
+        SalesTax salesTax = new SalesTax();
+        salesTax.setState("HI");
+        salesTax.setRate(BigDecimal.valueOf(.05));
+
+        SalesTax actualResult = service.removeSalesTax("HI");
+
+        assertEquals(0, actualResult.size());
     }
 }
