@@ -50,7 +50,7 @@ public class ServiceLayer {
         c.setProcessor(console.getProcessor());
         c.setPrice(console.getPrice());
         c.setQuantity(console.getQuantity());
-        consoleRepository.save(c);
+        c = consoleRepository.save(c);
         console.setConsole_id(c.getConsole_id());
         return console;
     }
@@ -127,7 +127,7 @@ public class ServiceLayer {
         g.setPrice(game.getPrice());
         g.setStudio(game.getStudio());
         g.setQuantity(game.getQuantity());
-        gameRepository.save(g);
+        g = gameRepository.save(g);
         game.setGame_id(g.getGame_id());
         return game;
     }
@@ -218,7 +218,7 @@ public class ServiceLayer {
             t.setPrice(tshirt.getPrice());
             t.setSize(tshirt.getSize());
             t.setQuantity(tshirt.getQuantity());
-            tShirtRepository.save(t);
+            t = tShirtRepository.save(t);
             tshirt.setT_shirt_id(t.getT_shirt_id());
             return tshirt;
         }
@@ -372,7 +372,7 @@ public class ServiceLayer {
             i.setTotal(invoice.getSubtotal().add(invoice.getTax()).add(invoice.getProcessing_fee()));
             invoice.setTotal(i.getTotal());
 
-            invoiceRepository.save(i);
+            i = invoiceRepository.save(i);
             invoice.setInvoice_id(i.getInvoice_id());
             return invoice;
         }
