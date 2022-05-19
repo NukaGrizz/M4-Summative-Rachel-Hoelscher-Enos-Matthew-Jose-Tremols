@@ -81,7 +81,7 @@ public class ConsoleControllerTest {
 
 
     @Test
-    public void getAllConsoles() throws Exception {
+    public void shouldReturnAllConsolesInStock() throws Exception {
 
         mockMvc.perform(get("/console"))
                 .andDo(print())
@@ -90,7 +90,7 @@ public class ConsoleControllerTest {
     }
 
     @Test
-    public void getConsoleById() throws Exception {
+    public void shouldReturnAConsoleWhenSearchingById() throws Exception {
 
         Console mockInput = new Console();
         mockInput.setConsole_id(2L);
@@ -110,7 +110,7 @@ public class ConsoleControllerTest {
     }
 
     @Test
-    public void createConsole() throws Exception {
+    public void shouldCreateNewConsole() throws Exception {
 
         Console createInput = new Console();
 //        createInput.setConsole_id(0L);
@@ -144,7 +144,7 @@ public class ConsoleControllerTest {
     }
 
     @Test
-    public void updateConsole() throws Exception {
+    public void shouldUpdateAnExistingConsolesInfo() throws Exception {
         Console updateOutput = new Console();
         updateOutput.setConsole_id(8L);
         updateOutput.setModel("N64");
@@ -166,7 +166,7 @@ public class ConsoleControllerTest {
 
     }
     @Test
-    public void deleteConsole() throws Exception {
+    public void shouldDeleteASingleConsoleById() throws Exception {
 
         mockMvc.perform(delete("/console/8"))
                 .andDo(print())
