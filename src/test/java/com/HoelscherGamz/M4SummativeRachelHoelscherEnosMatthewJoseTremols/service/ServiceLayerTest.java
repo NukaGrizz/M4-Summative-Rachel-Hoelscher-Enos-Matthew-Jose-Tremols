@@ -229,7 +229,7 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void findConsole() {
+    public void shouldFindConsole() {
         Console console1 = new Console();
         console1.setConsole_id(1L);
         console1.setModel("PS5");
@@ -244,7 +244,7 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void findAllConsole() {
+    public void shouldFindAllConsoles() {
 
         Console console1 = new Console();
         console1.setConsole_id(1L);
@@ -271,31 +271,43 @@ public class ServiceLayerTest {
 
     @Test
     public void findByManufacturer() {
-        List<Console> fromService = service.findAllConsole("manufacturerExample");
+        List<Console> fromService = service.findAllConsole("Sony");
 
         assertEquals(1, fromService.size());
     }
 
     @Test
-    public void updateConsole() {
-        Console console1 = new Console();
-        console1.setConsole_id(1L);
-        console1.setModel("PS5");
-        console1.setManufacturer("Sony");
-        console1.setMemory_amount("825 GB");
-        console1.setProcessor("AMD Zen 2 CPU");
-        console1.setPrice(BigDecimal.valueOf(499.99));
-        console1.setQuantity(100);
+    public void shouldUpdateConsole() {
+        Console console = new Console();
+        console.setConsole_id(1L);
+        console.setModel("PS5");
+        console.setManufacturer("Sony");
+        console.setMemory_amount("825 GB");
+        console.setProcessor("AMD Zen 2 CPU");
+        console.setPrice(BigDecimal.valueOf(499.99));
+        console.setQuantity(100);
+        consoleRepository.save(console);
 
-        Console console2 = new Console();
-        console2.setConsole_id(2L);
-        console2.setModel("XBox Series X");
-        console2.setManufacturer("Microsoft");
-        console2.setMemory_amount("1TB");
-        console2.setProcessor("AMD Zen 2 CPU");
-        console2.setPrice(BigDecimal.valueOf(550.99));
-        console2.setQuantity(200);
+        console.setModel("XBox Series X");
+        console.setManufacturer("Microsoft");
+        console.setMemory_amount("1TB");
+        console.setProcessor("AMD Zen 2 CPU");
+        console.setPrice(BigDecimal.valueOf(550.99));
+        console.setQuantity(200);
+        consoleRepository.save(console);
 
+        Console expectedConsole = new Console();
+        expectedConsole.setConsole_id(1L);
+        expectedConsole.setModel("XBox Series X");
+        expectedConsole.setManufacturer("Microsoft");
+        expectedConsole.setMemory_amount("1TB");
+        expectedConsole.setProcessor("AMD Zen 2 CPU");
+        expectedConsole.setPrice(BigDecimal.valueOf(550.99));
+        expectedConsole.setQuantity(200);
+
+        Console actualResult = service.saveConsole(console);
+
+        assertEquals(expectedConsole, actualResult);
     }
 
     @Test
@@ -327,18 +339,59 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void findGame() {
+    public void shouldFindGame() {
+        Game game1 = new Game();
+        game1.setGame_id(1L);
+        game1.setTitle("Breath of the Wild");
+        game1.setEsrbRating("E10+");
+        game1.setDescription("The player controls an amnesiac Link, who awakens from a hundred-year slumber, and attempts to regain his memories and prevent the destruction of Hyrule by Calamity Ganon.");
+        game1.setStudio("Nintendo");
+        game1.setPrice(BigDecimal.valueOf(40.99));
+        game1.setQuantity(150);
+
+        Game game = service.findGame(1L);
+        assertEquals(game1, game);
     }
 
     @Test
-    public void findAllGame() {
+    public void shouldFindAllGames() {
         List<Game> fromService = service.findAllGame();
 
         assertEquals(1, fromService.size());
     }
 
     @Test
-    public void updateGame() {
+    public void shouldUpdateGame() {
+        Game game = new Game();
+        game.setGame_id(1L);
+        game.setTitle("Breath of the Wild");
+        game.setEsrbRating("E10+");
+        game.setDescription("The player controls an amnesiac Link, who awakens from a hundred-year slumber, and attempts to regain his memories and prevent the destruction of Hyrule by Calamity Ganon.");
+        game.setStudio("Nintendo");
+        game.setPrice(BigDecimal.valueOf(40.99));
+        game.setQuantity(150);
+        gameRepository.save(game);
+
+        game.setTitle("Resident Evil Village");
+        game.setEsrbRating("M17+");
+        game.setDescription("Players control Ethan Winters, who searches for his kidnapped daughter in a village filled with mutant creatures. ");
+        game.setStudio("Capcom");
+        game.setPrice(BigDecimal.valueOf(35.99));
+        game.setQuantity(150);
+        gameRepository.save(game);
+
+        Game expectedGame = new Game();
+        expectedGame.setGame_id(1L);
+        expectedGame.setTitle("Resident Evil Village");
+        expectedGame.setEsrbRating("M17+");
+        expectedGame.setDescription("Players control Ethan Winters, who searches for his kidnapped daughter in a village filled with mutant creatures. ");
+        expectedGame.setStudio("Capcom");
+        expectedGame.setPrice(BigDecimal.valueOf(35.99));
+        expectedGame.setQuantity(150);
+
+        Game actualResult = service.saveGame(game);
+
+        assertEquals(expectedGame, actualResult);
     }
 
     @Test
@@ -380,18 +433,55 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void findTShirt() {
+    public void shouldFindTShirt() {
+        TShirt tShirt1 = new TShirt();
+        tShirt1.setT_shirt_id(1L);
+        tShirt1.setSize("Large");
+        tShirt1.setColor("Blue");
+        tShirt1.setDescription("Men's 100% Smash Bros Shirt");
+        tShirt1.setPrice(BigDecimal.valueOf(29.99));
+        tShirt1.setQuantity(1000);
+
+        TShirt tShirt = service.findTShirt(1L);
+        assertEquals(tShirt1, tShirt);
     }
 
     @Test
-    public void findAllTShirt() {
+    public void shouldFindAllTShirt() {
         List<TShirt> fromService = service.findAllTShirt();
 
         assertEquals(1, fromService.size());
     }
 
     @Test
-    public void updateTShirt() {
+    public void shouldUpdateTShirt() {
+        TShirt tShirt = new TShirt();
+        tShirt.setT_shirt_id(1L);
+        tShirt.setSize("Large");
+        tShirt.setColor("Blue");
+        tShirt.setDescription("Men's 100% Smash Bros Shirt");
+        tShirt.setPrice(BigDecimal.valueOf(29.99));
+        tShirt.setQuantity(1000);
+        tShirtRepository.save(tShirt);
+
+        tShirt.setSize("Medium");
+        tShirt.setColor("Green");
+        tShirt.setDescription("Women's Horizon Zero Dawn t-shirt");
+        tShirt.setPrice(BigDecimal.valueOf(35.99));
+        tShirt.setQuantity(1500);
+        tShirtRepository.save(tShirt);
+
+        TShirt expectedTShirt = new TShirt();
+        expectedTShirt.setT_shirt_id(1L);
+        expectedTShirt.setSize("Medium");
+        expectedTShirt.setColor("Green");
+        expectedTShirt.setDescription("Women's Horizon Zero Dawn t-shirt");
+        expectedTShirt.setPrice(BigDecimal.valueOf(35.99));
+        expectedTShirt.setQuantity(1500);
+
+        TShirt actualResult = service.saveTShirt(tShirt);
+
+        assertEquals(expectedTShirt, actualResult);
     }
 
     @Test
@@ -441,7 +531,25 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void findInvoice() {
+    public void shouldFindInvoice() {
+        Invoice invoice1 = new Invoice();
+        invoice1.setInvoice_id((1L));
+        invoice1.setName("Mary");
+        invoice1.setStreet("123 Oak Avenue");
+        invoice1.setCity("San Diego");
+        invoice1.setState("CA");
+        invoice1.setZipcode("92129");
+        invoice1.setItemType("game");
+        invoice1.setItemId(1L);
+        invoice1.setUnit_price(BigDecimal.valueOf(35.99));
+        invoice1.setQuantity(1);
+        invoice1.setSubtotal(BigDecimal.valueOf(35.99));
+        invoice1.setTax(BigDecimal.valueOf(1.06));
+        invoice1.setProcessing_fee(BigDecimal.valueOf(1.98));
+        invoice1.setTotal(BigDecimal.valueOf(40.12));
+
+        Invoice invoice = service.findInvoice(1L);
+        assertEquals(invoice1, invoice);
     }
 
     @Test
@@ -472,21 +580,47 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void findProcessingFee() {
-        processingFee fromService = service.findProcessingFee();
+    public void shouldFindProcessingFee() {
+        ProcessingFee processingFee1 = new ProcessingFee();
+        processingFee1.setProduct_type("game");
+        processingFee1.setFee(BigDecimal.valueOf(1.49));
 
-        assertEquals(1, fromService.size());
+        ProcessingFee processingFee = service.findProcessingFee("game");
+        assertEquals(processingFee1, processingFee);
+
+//        processingFee fromService = service.findProcessingFee();
+//
+//        assertEquals(1, fromService.size());
     }
 
     @Test
-    public void findAllProcessingFee() {
+    public void shouldFindAllProcessingFee() {
         List<ProcessingFee> fromService = service.findAllProcessingFee();
 
         assertEquals(1, fromService.size());
     }
 
     @Test
-    public void updateProcessingFee() {
+    public void shouldUpdateProcessingFee() {
+        ProcessingFee processingFee = new ProcessingFee();
+        processingFee.setProduct_type("game");
+        processingFee.setFee(BigDecimal.valueOf(1.49));
+        processingFeeRepository.save(processingFee);
+
+        processingFee.setProduct_type("console");
+        processingFee.setFee(BigDecimal.valueOf(14.99));
+        processingFeeRepository.save(processingFee);
+
+        ProcessingFee expectedProcessingFee = new ProcessingFee();
+        processingFee.setProduct_type("console");
+        processingFee.setFee(BigDecimal.valueOf(14.99));
+
+        ProcessingFee actualResult = service.saveProcessingFee(processingFee);
+
+        assertEquals(expectedProcessingFee, actualResult);
+
+//        Optional<ProcessingFee> processingFee = processingFeeRepository.findById("HI");
+//        assertEquals(processingFee1.get(), processingFee);
     }
 
     @Test
@@ -509,14 +643,21 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void findSalesTax() {
-        salesTax fromService = service.findSalesTax();
+    public void shouldFindSalesTax() {
+        SalesTax salesTax1 = new SalesTax();
+        salesTax1.setState("HI");
+        salesTax1.setRate(BigDecimal.valueOf(.05));
 
-        assertEquals(1, fromService.size());
+        SalesTax salesTax = service.findSalesTax("HI");
+        assertEquals(salesTax1, salesTax);
+
+//        salesTax fromService = service.findSalesTax();
+//
+//        assertEquals(1, fromService.size());
     }
 
     @Test
-    public void findAllSalesTax() {
+    public void shouldFindAllSalesTax() {
         List<SalesTax> fromService = service.findAllSalesTax();
 
         assertEquals(1, fromService.size());
@@ -539,5 +680,14 @@ public class ServiceLayerTest {
 
     @Test
     public void removeSalesTax() {
+//        SalesTax salesTax1 = new SalesTax();
+//        salesTax1.setState("CA");
+//        salesTax1.setRate(BigDecimal.valueOf(.06));
+//
+//        SalesTax salesTax2 = new SalesTax();
+//        salesTax2.setState("HI");
+//        salesTax2.setRate(BigDecimal.valueOf(.05));
+//
+//
     }
 }
