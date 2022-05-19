@@ -75,7 +75,7 @@ public class ConsoleControllerTest {
         //GET all mock
         List<Console> consoleList2 = Arrays.asList(mockOutput, createOutput, createInput);
 
-        doReturn(consoleList2).when(serviceLayer).findAllConsole();
+        doReturn(consoleList2).when(serviceLayer).findAllConsole(null);
 
     }
 

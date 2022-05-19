@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/console")
@@ -18,8 +19,9 @@ public class ConsoleController {
 
     //Get all console
     @GetMapping
-    public List<Console> getAllConsoles() {
-        return serviceLayer.findAllConsole();
+    public List<Console> getAllConsoles(@RequestParam(required = false) String manufacturer) {
+
+        return serviceLayer.findAllConsole(manufacturer);
     }
 
     //Get console by id
