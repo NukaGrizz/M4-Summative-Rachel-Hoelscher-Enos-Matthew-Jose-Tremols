@@ -20,14 +20,14 @@ public class SalesTaxController {
 
     //Get all SalesTax
     @GetMapping
-    public List<SalesTax> getAllSalesTax()throws Exception {
+    public List<SalesTax> getAllSalesTax() {
         return serviceLayer.findAllSalesTax();
     }
 
     //Get SalesTax by id
     @GetMapping(value = "/{state}")
     @ResponseStatus(HttpStatus.OK)
-    public SalesTax getSalesTaxById(@PathVariable String state)throws Exception {
+    public SalesTax getSalesTaxById(@PathVariable String state) {
         SalesTax salesTax = serviceLayer.findSalesTax(state);
         return salesTax;
     }
@@ -36,7 +36,7 @@ public class SalesTaxController {
     //Create SalesTax
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public SalesTax createSalesTax(@RequestBody @Valid SalesTax salesTax)throws Exception {
+    public SalesTax createSalesTax(@RequestBody @Valid SalesTax salesTax) {
         SalesTax returnSalesTax = serviceLayer.saveSalesTax(salesTax);
         return returnSalesTax;
     }
@@ -44,7 +44,7 @@ public class SalesTaxController {
     //Update SalesTax
     @PutMapping(value = "/{state}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateSalesTax(@RequestBody SalesTax salesTax, @PathVariable String state)throws Exception {
+    public void updateSalesTax(@RequestBody SalesTax salesTax, @PathVariable String state) {
         if (salesTax.getState() == null) {
             salesTax.setState(state);
         }
@@ -58,7 +58,7 @@ public class SalesTaxController {
     //Delete SalesTaxby id
     @DeleteMapping(value = "/{state}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteSalesTax(@PathVariable String state)throws Exception {
+    public void deleteSalesTax(@PathVariable String state) {
         serviceLayer.removeSalesTax(state);
     }
 

@@ -19,7 +19,7 @@ public class ConsoleController {
 
     //Get all console
     @GetMapping
-    public List<Console> getAllConsoles(@RequestParam(required = false) String manufacturer) throws Exception {
+    public List<Console> getAllConsoles(@RequestParam(required = false) String manufacturer){
 
         return serviceLayer.findAllConsole(manufacturer);
     }
@@ -36,7 +36,7 @@ public class ConsoleController {
     //Create console
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Console createConsole(@RequestBody @Valid Console console) throws Exception{
+    public Console createConsole(@RequestBody @Valid Console console){
         Console returnConsole = serviceLayer.saveConsole(console);
         return returnConsole;
     }
@@ -44,7 +44,7 @@ public class ConsoleController {
     //Update console
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateConsole(@RequestBody Console console, @PathVariable long id)throws Exception {
+    public void updateConsole(@RequestBody Console console, @PathVariable long id) {
         if (console.getConsole_id() == null) {
             console.setConsole_id(id);
         }
@@ -58,7 +58,7 @@ public class ConsoleController {
     //Delete by id
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteConsole(@PathVariable long id)throws Exception {
+    public void deleteConsole(@PathVariable long id) {
         serviceLayer.removeConsole(id);
     }
 
