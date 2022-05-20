@@ -21,6 +21,11 @@ public class CustomErrorResponse {
         this.timestamp = LocalDateTime.now();
     }
 
+    public CustomErrorResponse(String errorCode, String errorMsg) {
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+    }
+
     public String getErrorMsg() {
         return errorMsg;
     }
