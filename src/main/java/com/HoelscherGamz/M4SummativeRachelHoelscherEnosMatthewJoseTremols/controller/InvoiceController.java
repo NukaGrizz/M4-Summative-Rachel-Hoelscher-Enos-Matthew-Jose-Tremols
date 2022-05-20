@@ -19,14 +19,14 @@ public class InvoiceController {
 
     //Get all invoice
     @GetMapping
-    public List<Invoice> getAllInvoices() {
+    public List<Invoice> getAllInvoices()throws Exception {
         return serviceLayer.findAllInvoice();
     }
 
     //Get invoice by id
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Invoice getInvoiceById(@PathVariable long id) {
+    public Invoice getInvoiceById(@PathVariable long id)throws Exception {
         Invoice invoice = serviceLayer.findInvoice(id);
         return invoice;
     }
@@ -72,7 +72,7 @@ public class InvoiceController {
     //Delete invoice by id
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteInvoice(@PathVariable long id) {
+    public void deleteInvoice(@PathVariable long id)throws Exception {
         serviceLayer.removeInvoice(id);
     }
 }

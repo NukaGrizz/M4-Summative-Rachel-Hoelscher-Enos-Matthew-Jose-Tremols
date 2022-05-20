@@ -19,14 +19,14 @@ public class ProcessingFeeController {
 
         //Get all ProcessingFee
         @GetMapping
-        public List<ProcessingFee> getAllProcessingFee() {
+        public List<ProcessingFee> getAllProcessingFee()throws Exception {
             return serviceLayer.findAllProcessingFee();
         }
 
         //Get ProcessingFee by id
         @GetMapping(value = "/{productType}")
         @ResponseStatus(HttpStatus.OK)
-        public ProcessingFee getProcessingFeeById(@PathVariable String productType) {
+        public ProcessingFee getProcessingFeeById(@PathVariable String productType) throws Exception{
             ProcessingFee processingFee = serviceLayer.findProcessingFee(productType);
             return processingFee;
         }
@@ -35,7 +35,7 @@ public class ProcessingFeeController {
         //Create ProcessingFee
         @PostMapping
         @ResponseStatus(HttpStatus.CREATED)
-        public ProcessingFee createProcessingFee(@RequestBody @Valid ProcessingFee processingFee) {
+        public ProcessingFee createProcessingFee(@RequestBody @Valid ProcessingFee processingFee) throws Exception{
             ProcessingFee returnProcessingFee = serviceLayer.saveProcessingFee(processingFee);
             return returnProcessingFee;
         }
@@ -43,7 +43,7 @@ public class ProcessingFeeController {
         //Update ProcessingFee
         @PutMapping(value = "/{productType}")
         @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void updateProcessingFee(@RequestBody ProcessingFee processingFee, @PathVariable String productType) {
+        public void updateProcessingFee(@RequestBody ProcessingFee processingFee, @PathVariable String productType)throws Exception {
             if (processingFee.getProduct_type() == null) {
                 processingFee.setProduct_type(productType);
             }
@@ -57,5 +57,5 @@ public class ProcessingFeeController {
         //Delete ProcessingFee by id
         @DeleteMapping(value = "/{productType}")
         @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void deleteProcessingFee(@PathVariable String productType) { serviceLayer.removeProcessingFee(productType) ;}
+        public void deleteProcessingFee(@PathVariable String productType)throws Exception { serviceLayer.removeProcessingFee(productType) ;}
 }
