@@ -58,7 +58,7 @@ public class ServiceLayer {
     }
 
     //Find Console By Id
-    public Console findConsole(Long id) throws Exception{
+    public Console findConsole(Long id){
 
         // Get the console object first
         Optional<Console> console = consoleRepository.findById(id);
@@ -113,6 +113,13 @@ public class ServiceLayer {
     //Delete the Console
     @Transactional
     public void removeConsole(Long id){
+
+        Optional<Console> console = consoleRepository.findById(id);
+
+        if (!console.isPresent()) {
+            throw new NotFoundException("No Console Found By That ID!");
+        }
+
         // Remove Console
         consoleRepository.deleteById(id);
     }
@@ -140,7 +147,7 @@ public class ServiceLayer {
     }
 
     //Get game by id
-    public Game findGame(Long id) throws Exception{
+    public Game findGame(Long id){
 
         // Get the game object first
         Optional<Game> game = gameRepository.findById(id);
@@ -195,6 +202,13 @@ public class ServiceLayer {
         // Delete Game
         @Transactional
         public void removeGame (Long id){
+
+            Optional<Game> game = gameRepository.findById(id);
+
+            if (!game.isPresent()) {
+                throw new NotFoundException("No Game Found By That ID!");
+            }
+
             gameRepository.deleteById(id);
         }
 
@@ -235,7 +249,7 @@ public class ServiceLayer {
         }
 
         //Get TShirt by id
-        public TShirt findTShirt (Long id)throws Exception{
+        public TShirt findTShirt (Long id){
 
             Optional<TShirt> tShirt = tShirtRepository.findById(id);
 
@@ -284,6 +298,12 @@ public class ServiceLayer {
         // Delete TShirt
         @Transactional
         public void removeTShirt (Long id){
+
+            Optional<TShirt> tShirt = tShirtRepository.findById(id);
+
+            if (!tShirt.isPresent()) {
+                throw new NotFoundException("No TShirt Found By That ID!");
+            }
             tShirtRepository.deleteById(id);
         }
 
@@ -304,7 +324,7 @@ public class ServiceLayer {
 
         //Create New Invoice
         @Transactional
-        public Invoice saveInvoice (Invoice invoice) throws Exception {
+        public Invoice saveInvoice (Invoice invoice){
 
              //Persist invoice - the following 8 fields are required to create invoice!!
             Invoice i = new Invoice();
@@ -396,7 +416,7 @@ public class ServiceLayer {
         }
 
         //Get Invoice by id
-        public Invoice findInvoice(Long id)throws Exception{
+        public Invoice findInvoice(Long id){
 
             // Get the game object first
             Optional<Invoice> invoice = invoiceRepository.findById(id);
@@ -442,6 +462,13 @@ public class ServiceLayer {
         // Delete Invoice
         @Transactional
         public void removeInvoice(Long id){
+
+            Optional<Invoice> invoice = invoiceRepository.findById(id);
+
+            if (!invoice.isPresent()) {
+                throw new NotFoundException("No Invoice Found By That ID!");
+            }
+
             invoiceRepository.deleteById(id);
         }
 

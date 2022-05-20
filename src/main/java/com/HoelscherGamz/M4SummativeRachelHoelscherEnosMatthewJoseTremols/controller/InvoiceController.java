@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,7 +27,7 @@ public class InvoiceController {
     //Get invoice by id
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Invoice getInvoiceById(@PathVariable long id)throws Exception {
+    public Invoice getInvoiceById(@PathVariable long id) {
         Invoice invoice = serviceLayer.findInvoice(id);
         return invoice;
     }
@@ -58,9 +59,9 @@ public class InvoiceController {
     //Update invoice
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateInvoice(@RequestBody Invoice invoice, @PathVariable long id) {
+    public void updateInvoice(@RequestBody @Valid Invoice invoice, @PathVariable long id) throws Exception {
         if (invoice.getInvoice_id() == null) {
-            invoice.setInvoice_id(id);
+            throw new MissingRequestValueException("Must supply invoiceid value in json");
         }
 
         if (invoice.getInvoice_id() != id) {

@@ -6,6 +6,7 @@ import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.reposi
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,7 +29,7 @@ public class TShirtController {
     //Get tShirt by id
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TShirt getTShirtById(@PathVariable long id)throws Exception {
+    public TShirt getTShirtById(@PathVariable long id) {
        TShirt tShirt = serviceLayer.findTShirt(id);
         return tShirt;
     }
@@ -44,9 +45,9 @@ public class TShirtController {
     //Update tShirt
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateTShirt(@RequestBody TShirt tShirt, @PathVariable long id){
+    public void updateTShirt(@RequestBody @Valid TShirt tShirt, @PathVariable long id) throws Exception {
         if(tShirt.getT_shirt_id() == null) {
-            tShirt.setT_shirt_id(id);
+            throw new MissingRequestValueException("Must supply tshirtid value in json");
         }
 
         if(tShirt.getT_shirt_id() != id) {

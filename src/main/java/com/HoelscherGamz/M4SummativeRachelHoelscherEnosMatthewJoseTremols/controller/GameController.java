@@ -5,6 +5,7 @@ import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.reposi
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,7 +28,7 @@ public class GameController {
     //Get game by id
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Game getGameById(@PathVariable long id)throws Exception {
+    public Game getGameById(@PathVariable long id) {
         Game game = serviceLayer.findGame(id);
         return game;
     }
@@ -43,9 +44,9 @@ public class GameController {
     //Update game
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateGame(@RequestBody Game game, @PathVariable long id) {
+    public void updateGame(@RequestBody @Valid Game game, @PathVariable long id) throws Exception {
         if (game.getGame_id() == null) {
-            game.setGame_id(id);
+            throw new MissingRequestValueException("Must supply gameid value in json");
         }
 
         if (game.getGame_id() != id) {
