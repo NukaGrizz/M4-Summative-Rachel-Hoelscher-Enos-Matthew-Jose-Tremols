@@ -20,14 +20,14 @@ public class GameController {
 
     //Get all game
     @GetMapping
-    public List<Game> getAllGames(@RequestParam(required = false) String studio,@RequestParam(required = false) String esrbRating, @RequestParam(required = false) String title) {
+    public List<Game> getAllGames(@RequestParam(required = false) String studio,@RequestParam(required = false) String esrbRating, @RequestParam(required = false) String title) throws Exception{
         return serviceLayer.findAllGame(studio, esrbRating, title);
     }
 
     //Get game by id
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Game getGameById(@PathVariable long id) {
+    public Game getGameById(@PathVariable long id)throws Exception {
         Game game = serviceLayer.findGame(id);
         return game;
     }
@@ -35,7 +35,7 @@ public class GameController {
     //Create game
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Game createGame(@RequestBody @Valid Game game) {
+    public Game createGame(@RequestBody @Valid Game game)throws Exception {
         Game returnGame = serviceLayer.saveGame(game);
         return returnGame;
     }
@@ -43,7 +43,7 @@ public class GameController {
     //Update game
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateGame(@RequestBody Game game, @PathVariable long id) {
+    public void updateGame(@RequestBody Game game, @PathVariable long id) throws Exception{
         if (game.getGame_id() == null) {
             game.setGame_id(id);
         }
@@ -57,7 +57,7 @@ public class GameController {
     //Delete game by id
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteGame(@PathVariable long id) {
+    public void deleteGame(@PathVariable long id)throws Exception {
         serviceLayer.removeGame(id);
     }
 }

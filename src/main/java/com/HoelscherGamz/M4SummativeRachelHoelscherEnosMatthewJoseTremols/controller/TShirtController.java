@@ -21,14 +21,14 @@ public class TShirtController {
 
     //Get all tShirt
     @GetMapping
-    public List<TShirt> getAllTShirt(@RequestParam(required = false) String color, @RequestParam(required = false) String size) {
+    public List<TShirt> getAllTShirt(@RequestParam(required = false) String color, @RequestParam(required = false) String size) throws Exception{
         return serviceLayer.findAllTShirt(color, size);
     }
 
     //Get tShirt by id
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TShirt getTShirtById(@PathVariable long id) {
+    public TShirt getTShirtById(@PathVariable long id)throws Exception {
        TShirt tShirt = serviceLayer.findTShirt(id);
         return tShirt;
     }
@@ -36,7 +36,7 @@ public class TShirtController {
     //Create tShirt
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TShirt createTShirt(@RequestBody @Valid TShirt tShirt) {
+    public TShirt createTShirt(@RequestBody @Valid TShirt tShirt) throws Exception{
         TShirt returnTShirt = serviceLayer.saveTShirt(tShirt);
         return returnTShirt;
     }
@@ -44,7 +44,7 @@ public class TShirtController {
     //Update tShirt
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateTShirt(@RequestBody TShirt tShirt, @PathVariable long id) {
+    public void updateTShirt(@RequestBody TShirt tShirt, @PathVariable long id) throws Exception{
         if(tShirt.getT_shirt_id() == null) {
             tShirt.setT_shirt_id(id);
         }
@@ -58,7 +58,7 @@ public class TShirtController {
     //Delete by id
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTShirt(@PathVariable long id) {
+    public void deleteTShirt(@PathVariable long id)throws Exception {
         serviceLayer.removeTShirt(id);
     }
 
