@@ -135,7 +135,7 @@ public class ServiceLayer {
     }
 
     //Get game by id
-    public Game findGame(Long id) {
+    public Game findGame(Long id) throws Exception{
 
         // Get the game object first
         Optional<Game> game = gameRepository.findById(id);
