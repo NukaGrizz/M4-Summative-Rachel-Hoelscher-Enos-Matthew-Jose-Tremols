@@ -19,7 +19,7 @@ public class InvoiceController {
 
     //Get all invoice
     @GetMapping
-    public List<Invoice> getAllInvoices()throws Exception {
+    public List<Invoice> getAllInvoices() {
         return serviceLayer.findAllInvoice();
     }
 
@@ -58,7 +58,7 @@ public class InvoiceController {
     //Update invoice
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateInvoice(@RequestBody Invoice invoice, @PathVariable long id) throws Exception {
+    public void updateInvoice(@RequestBody Invoice invoice, @PathVariable long id) {
         if (invoice.getInvoice_id() == null) {
             invoice.setInvoice_id(id);
         }
@@ -72,7 +72,7 @@ public class InvoiceController {
     //Delete invoice by id
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteInvoice(@PathVariable long id)throws Exception {
+    public void deleteInvoice(@PathVariable long id){
         serviceLayer.removeInvoice(id);
     }
 }
