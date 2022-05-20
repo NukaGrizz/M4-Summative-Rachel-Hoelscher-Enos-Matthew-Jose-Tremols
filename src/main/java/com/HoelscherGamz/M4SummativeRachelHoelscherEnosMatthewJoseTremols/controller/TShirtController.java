@@ -28,7 +28,7 @@ public class TShirtController {
     //Get tShirt by id
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TShirt getTShirtById(@PathVariable long id)throws Exception {
+    public TShirt getTShirtById(@PathVariable long id) {
        TShirt tShirt = serviceLayer.findTShirt(id);
         return tShirt;
     }

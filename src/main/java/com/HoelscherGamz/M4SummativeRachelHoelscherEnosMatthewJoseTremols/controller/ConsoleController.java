@@ -27,7 +27,7 @@ public class ConsoleController {
     //Get console by id
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Console getConsoleById(@PathVariable long id) throws Exception{
+    public Console getConsoleById(@PathVariable long id){
         Console console = serviceLayer.findConsole(id);
         return console;
     }
