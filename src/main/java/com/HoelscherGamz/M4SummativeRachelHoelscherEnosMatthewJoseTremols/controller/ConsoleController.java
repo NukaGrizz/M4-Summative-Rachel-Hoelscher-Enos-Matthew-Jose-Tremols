@@ -44,7 +44,7 @@ public class ConsoleController {
     //Update console
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateConsole(@RequestBody Console console, @PathVariable long id) {
+    public void updateConsole(@RequestBody @Valid Console console, @PathVariable long id) {
         if (console.getConsole_id() == null) {
             console.setConsole_id(id);
         }

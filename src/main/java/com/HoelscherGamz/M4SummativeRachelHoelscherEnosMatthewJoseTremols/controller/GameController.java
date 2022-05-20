@@ -43,7 +43,7 @@ public class GameController {
     //Update game
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateGame(@RequestBody Game game, @PathVariable long id) {
+    public void updateGame(@RequestBody @Valid Game game, @PathVariable long id) {
         if (game.getGame_id() == null) {
             game.setGame_id(id);
         }

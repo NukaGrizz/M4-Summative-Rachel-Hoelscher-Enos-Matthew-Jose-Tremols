@@ -44,7 +44,7 @@ public class TShirtController {
     //Update tShirt
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateTShirt(@RequestBody TShirt tShirt, @PathVariable long id){
+    public void updateTShirt(@RequestBody @Valid TShirt tShirt, @PathVariable long id){
         if(tShirt.getT_shirt_id() == null) {
             tShirt.setT_shirt_id(id);
         }

@@ -113,6 +113,13 @@ public class ServiceLayer {
     //Delete the Console
     @Transactional
     public void removeConsole(Long id){
+
+        Optional<Console> console = consoleRepository.findById(id);
+
+        if (!console.isPresent()) {
+            throw new NotFoundException("No Console Found By That ID!");
+        }
+
         // Remove Console
         consoleRepository.deleteById(id);
     }
@@ -195,6 +202,13 @@ public class ServiceLayer {
         // Delete Game
         @Transactional
         public void removeGame (Long id){
+
+            Optional<Game> game = gameRepository.findById(id);
+
+            if (!game.isPresent()) {
+                throw new NotFoundException("No Game Found By That ID!");
+            }
+
             gameRepository.deleteById(id);
         }
 
@@ -284,6 +298,12 @@ public class ServiceLayer {
         // Delete TShirt
         @Transactional
         public void removeTShirt (Long id){
+
+            Optional<TShirt> tShirt = tShirtRepository.findById(id);
+
+            if (!tShirt.isPresent()) {
+                throw new NotFoundException("No TShirt Found By That ID!");
+            }
             tShirtRepository.deleteById(id);
         }
 
@@ -442,6 +462,13 @@ public class ServiceLayer {
         // Delete Invoice
         @Transactional
         public void removeInvoice(Long id){
+
+            Optional<Invoice> invoice = invoiceRepository.findById(id);
+
+            if (!invoice.isPresent()) {
+                throw new NotFoundException("No Invoice Found By That ID!");
+            }
+
             invoiceRepository.deleteById(id);
         }
 

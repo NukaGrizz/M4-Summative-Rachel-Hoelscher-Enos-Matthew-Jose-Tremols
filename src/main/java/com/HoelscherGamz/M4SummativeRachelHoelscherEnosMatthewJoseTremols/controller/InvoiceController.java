@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -58,7 +59,7 @@ public class InvoiceController {
     //Update invoice
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateInvoice(@RequestBody Invoice invoice, @PathVariable long id) {
+    public void updateInvoice(@RequestBody @Valid Invoice invoice, @PathVariable long id) {
         if (invoice.getInvoice_id() == null) {
             invoice.setInvoice_id(id);
         }
