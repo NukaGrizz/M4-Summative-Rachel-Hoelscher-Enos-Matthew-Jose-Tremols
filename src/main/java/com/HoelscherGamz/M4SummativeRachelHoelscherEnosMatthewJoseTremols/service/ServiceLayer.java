@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.NoTransactionException;
 import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +42,7 @@ public class ServiceLayer {
 
     //Create new Console
     @Transactional
-    public Console saveConsole(Console console) throws Exception{
+    public Console saveConsole(Console console) {
 
         // Persist console
         Console c = new Console();
@@ -63,11 +63,16 @@ public class ServiceLayer {
         // Get the console object first
         Optional<Console> console = consoleRepository.findById(id);
 
+        if (!console.isPresent()) {
+            throw new NotFoundException("No Console Found By That ID!");
+        }
+
+
         return console.isPresent() ? console.get() : null;
     }
 
     // find All consoles
-    public List<Console> findAllConsole(String manufacturer) throws Exception{
+    public List<Console> findAllConsole(String manufacturer){
 
         List<Console> consoleList = consoleRepository.findAll();
 
@@ -91,7 +96,7 @@ public class ServiceLayer {
 
     //Update console
     @Transactional
-    public void updateConsole(Console console) throws Exception{
+    public void updateConsole(Console console){
 
         // Update the console information
         Console c = new Console();
@@ -107,7 +112,7 @@ public class ServiceLayer {
 
     //Delete the Console
     @Transactional
-    public void removeConsole(Long id) throws Exception{
+    public void removeConsole(Long id){
         // Remove Console
         consoleRepository.deleteById(id);
     }
@@ -119,7 +124,7 @@ public class ServiceLayer {
 
     //Create new game
     @Transactional
-    public Game saveGame(Game game) throws Exception{
+    public Game saveGame(Game game){
 
         // Persist console
         Game g = new Game();
@@ -140,11 +145,15 @@ public class ServiceLayer {
         // Get the game object first
         Optional<Game> game = gameRepository.findById(id);
 
+        if (!game.isPresent()) {
+            throw new NotFoundException("No Game Found By That ID!");
+        }
+
         return game.isPresent() ? game.get() : null;
     }
 
     //Get all games
-    public List<Game> findAllGame(String studio, String esrbRating, String title) throws Exception{
+    public List<Game> findAllGame(String studio, String esrbRating, String title){
 
         List<Game> gameList = gameRepository.findAll();
 
@@ -171,7 +180,7 @@ public class ServiceLayer {
 
         // Update game information
         @Transactional
-        public void updateGame (Game game)throws Exception{
+        public void updateGame (Game game){
             Game g = new Game();
             g.setGame_id(game.getGame_id());
             g.setTitle(game.getTitle());
@@ -185,22 +194,22 @@ public class ServiceLayer {
 
         // Delete Game
         @Transactional
-        public void removeGame (Long id) throws Exception{
+        public void removeGame (Long id){
             gameRepository.deleteById(id);
         }
 
         //Search for games by studio
-        public List<Game> findByStudio (String studio) throws Exception{
+        public List<Game> findByStudio (String studio){
             return gameRepository.findAllGamesByStudio(studio);
         }
 
         //Search for games by ESBR_Rating
-        public List<Game> findByRating (String rating) throws Exception {
+        public List<Game> findByRating (String rating) {
             return gameRepository.findAllGamesByEsrbRating(rating);
         }
 
         //Search for games by Title
-        public List<Game> findByTitle (String title)throws Exception {
+        public List<Game> findByTitle (String title) {
             return gameRepository.findAllGamesByTitle(title);
         }
 
@@ -211,7 +220,7 @@ public class ServiceLayer {
 
         //Create new TShirt
         @Transactional
-        public TShirt saveTShirt (TShirt tshirt)throws Exception{
+        public TShirt saveTShirt (TShirt tshirt){
 
             // Persist console
             TShirt t = new TShirt();
@@ -230,11 +239,15 @@ public class ServiceLayer {
 
             Optional<TShirt> tShirt = tShirtRepository.findById(id);
 
+            if (!tShirt.isPresent()) {
+                throw new NotFoundException("No TShirt Found By That ID!");
+            }
+
             return tShirt.isPresent() ? tShirt.get() : null;
         }
 
         //Get all TShirts
-        public List<TShirt> findAllTShirt (String color, String size)throws Exception {
+        public List<TShirt> findAllTShirt (String color, String size) {
 
             List<TShirt> tShirtList = tShirtRepository.findAll();
 
@@ -257,7 +270,7 @@ public class ServiceLayer {
 
         // Update TShirt information
         @Transactional
-        public void updateTShirt (TShirt tShirt)throws Exception{
+        public void updateTShirt (TShirt tShirt){
             TShirt t = new TShirt();
             t.setT_shirt_id(tShirt.getT_shirt_id());
             t.setColor(tShirt.getColor());
@@ -270,17 +283,17 @@ public class ServiceLayer {
 
         // Delete TShirt
         @Transactional
-        public void removeTShirt (Long id)throws Exception{
+        public void removeTShirt (Long id){
             tShirtRepository.deleteById(id);
         }
 
         //Search for T-shirts by color.
-        public List<TShirt> findByColor (String color)throws Exception{
+        public List<TShirt> findByColor (String color){
             return tShirtRepository.findByColor(color);
         }
 
         //Search for T-shirts by size.
-        public List<TShirt> findBySize (String size)throws Exception{
+        public List<TShirt> findBySize (String size){
             return tShirtRepository.findBySize(size);
         }
 
@@ -383,25 +396,31 @@ public class ServiceLayer {
         }
 
         //Get Invoice by id
-        public Invoice findInvoice (Long id)throws Exception{
+        public Invoice findInvoice(Long id)throws Exception{
 
             // Get the game object first
             Optional<Invoice> invoice = invoiceRepository.findById(id);
+
+            if (!invoice.isPresent()) {
+                throw new NotFoundException("No Invoice Found By That ID!");
+            }
 
             return invoice.isPresent() ? invoice.get() : null;
         }
 
         //Get all Invoices
-        public List<Invoice> findAllInvoice () throws Exception{
+        public List<Invoice> findAllInvoice() {
 
             List<Invoice> invoiceList = invoiceRepository.findAll();
+
+
 
             return invoiceList;
         }
 
         // Update Invoice information
         @Transactional
-        public void updateInvoice (Invoice invoice)throws Exception{
+        public void updateInvoice(Invoice invoice){
             Invoice i = new Invoice();
             i.setInvoice_id(invoice.getInvoice_id());
             i.setName(invoice.getName());
@@ -422,7 +441,7 @@ public class ServiceLayer {
 
         // Delete Invoice
         @Transactional
-        public void removeInvoice (Long id)throws Exception{
+        public void removeInvoice(Long id){
             invoiceRepository.deleteById(id);
         }
 
@@ -433,7 +452,7 @@ public class ServiceLayer {
 
         //Create new processing fee
         @Transactional
-        public ProcessingFee saveProcessingFee (ProcessingFee processingFee)throws Exception{
+        public ProcessingFee saveProcessingFee(ProcessingFee processingFee){
 
             // Persist processingFee
             ProcessingFee p = new ProcessingFee();
@@ -444,7 +463,7 @@ public class ServiceLayer {
         }
 
         //Get ProcessingFee by id->"productType"
-        public ProcessingFee findProcessingFee (String productType)throws Exception{
+        public ProcessingFee findProcessingFee(String productType){
 
             // Get the game object first
             Optional<ProcessingFee> processingFee = processingFeeRepository.findById(productType);
@@ -462,7 +481,7 @@ public class ServiceLayer {
 
         // Update ProcessingFee information
         @Transactional
-        public void updateProcessingFee (ProcessingFee processingFee)throws Exception{
+        public void updateProcessingFee(ProcessingFee processingFee){
             ProcessingFee p = new ProcessingFee();
             p.setProduct_type(processingFee.getProduct_type());
             p.setFee(processingFee.getFee());
@@ -471,7 +490,7 @@ public class ServiceLayer {
 
         // Delete ProcessingFee
         @Transactional
-        public void removeProcessingFee (String productType)throws Exception{
+        public void removeProcessingFee(String productType){
             processingFeeRepository.deleteById(productType);
         }
 
@@ -482,7 +501,7 @@ public class ServiceLayer {
 
         //Create new sales tax
         @Transactional
-        public SalesTax saveSalesTax (SalesTax salesTax)throws Exception{
+        public SalesTax saveSalesTax(SalesTax salesTax){
 
             // Persist sales tax
             SalesTax s = new SalesTax();
@@ -493,7 +512,7 @@ public class ServiceLayer {
         }
 
         //Get Sales Tax by id->"State"
-        public SalesTax findSalesTax (String state)throws Exception{
+        public SalesTax findSalesTax(String state){
 
             // Get the game object first
             Optional<SalesTax> salesTax = salesTaxRepository.findById(state);
@@ -502,7 +521,7 @@ public class ServiceLayer {
         }
 
         //Get all Sales Tax
-        public List<SalesTax> findAllSalesTax ()throws Exception {
+        public List<SalesTax> findAllSalesTax(){
 
             List<SalesTax> salesTaxList = salesTaxRepository.findAll();
 
@@ -511,7 +530,7 @@ public class ServiceLayer {
 
         // Update Sales Tax information
         @Transactional
-        public void updateSalesTax (SalesTax salesTax)throws Exception{
+        public void updateSalesTax(SalesTax salesTax){
             SalesTax s = new SalesTax();
             s.setState(salesTax.getState());
             s.setRate(salesTax.getRate());
@@ -520,7 +539,7 @@ public class ServiceLayer {
 
         // Delete ProcessingFee
         @Transactional
-        public void removeSalesTax (String State)throws Exception{
+        public void removeSalesTax(String State){
             salesTaxRepository.deleteById(State);
         }
 
