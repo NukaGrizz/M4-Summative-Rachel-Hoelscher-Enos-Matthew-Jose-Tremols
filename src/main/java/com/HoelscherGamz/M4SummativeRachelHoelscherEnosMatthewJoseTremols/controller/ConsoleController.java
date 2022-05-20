@@ -4,6 +4,7 @@ import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.model.
 import com.HoelscherGamz.M4SummativeRachelHoelscherEnosMatthewJoseTremols.service.ServiceLayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -44,9 +45,9 @@ public class ConsoleController {
     //Update console
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateConsole(@RequestBody @Valid Console console, @PathVariable long id) {
+    public void updateConsole(@RequestBody @Valid Console console, @PathVariable long id) throws Exception {
         if (console.getConsole_id() == null) {
-            console.setConsole_id(id);
+            throw new MissingRequestValueException("Must supply consoleid value in json");
         }
 
         if (console.getConsole_id() != id) {

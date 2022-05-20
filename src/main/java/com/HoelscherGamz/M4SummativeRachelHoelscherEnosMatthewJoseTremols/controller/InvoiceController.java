@@ -59,9 +59,9 @@ public class InvoiceController {
     //Update invoice
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateInvoice(@RequestBody @Valid Invoice invoice, @PathVariable long id) {
+    public void updateInvoice(@RequestBody @Valid Invoice invoice, @PathVariable long id) throws Exception {
         if (invoice.getInvoice_id() == null) {
-            invoice.setInvoice_id(id);
+            throw new MissingRequestValueException("Must supply invoiceid value in json");
         }
 
         if (invoice.getInvoice_id() != id) {
