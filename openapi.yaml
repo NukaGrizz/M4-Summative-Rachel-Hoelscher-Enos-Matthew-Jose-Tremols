@@ -20,7 +20,7 @@ paths:
             format: int64
       responses:
         '200':
-          description: OK
+          description: Gets a t shirt by its id
           content:
             '*/*':
               schema:
